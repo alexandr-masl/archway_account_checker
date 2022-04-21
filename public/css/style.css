@@ -291,7 +291,7 @@ header .intro-text {
   height: 4px;
   width: 60px;
   bottom: 0;
-  left: 30px;
+  left: 70px;
 }
 #contact h3 {
   color: #fff;
@@ -304,7 +304,7 @@ header .intro-text {
   padding-top: 20px;
 }
 #contact .text-danger {
-  color: #cc0033;
+  color: #111010;
   text-align: left;
 }
 #contact .btn-custom {

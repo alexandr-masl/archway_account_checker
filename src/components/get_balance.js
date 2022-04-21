@@ -1,17 +1,25 @@
 import React from 'react'
 import { useState } from 'react'
+// init("user_sklvQNCX9AIjZ1VyPrKoJ");
+
+// import { SigningCosmWasmClient } from "@cosmjs/cosmwasm-stargate";
+// import { calculateFee, coin, GasPrice } from "@cosmjs/stargate";
 import { ConstantineInfo } from '../chain.info.constantine';
+
 import {CosmWasmClient} from "@cosmjs/cosmwasm-stargate"
+
 const RPC = ConstantineInfo.rpc;
 
 const initialState = {
-  name: ''
+  name: '',
+  // email: '',
+  // message: '',
 }
 
 
 export const Get_Balance_Form = (props) => {
 
-  const [{ name }, setState] = useState(initialState)
+  const [{ name, email, message }, setState] = useState(initialState)
   const [form_is_submited, setFormState] = useState(false)
   const [balance_responce, checkBalance] = useState({})
 
@@ -23,7 +31,7 @@ export const Get_Balance_Form = (props) => {
   }
 
   const handleSubmit = async (e) => {
-    // e.preventDefault()
+    e.preventDefault()
 
     let cosm_wasm_client = await CosmWasmClient.connect(RPC);
     const _is_submited_switching = form_is_submited ? false : true
@@ -61,8 +69,6 @@ export const Get_Balance_Form = (props) => {
     }
 
     setFormState(_is_submited_switching)
-
-    return _is_submited_switching
   }
 
   const account_info = (() => {   
@@ -83,9 +89,12 @@ export const Get_Balance_Form = (props) => {
     const err_submit = (
 
       <div className="section-title">
+
         <h2> Account Info</h2>
-        <p>
-          {balance_responce.err}
+
+        <p className="text-danger" >
+            
+            {balance_responce.err}
         </p> 
       </div>
     )
@@ -106,7 +115,7 @@ export const Get_Balance_Form = (props) => {
               <div className='section-title'>
                 <h2>Accounts checker</h2>
                 <p>
-                  Hi, here you can get a full public information of any Archway-network account, just input the account adress
+                  Here you can get a full public information of any Archway-network account, just input the account adress
                 </p>
                 <p> For example u can try to input this adress: archway1d7krrujhwlkjd5mmv5g6hnqpzpa0dt2x8hcnys </p>
                 {/* <p> archway1d7krrujhwlkjd5mmv5g6hnqpzpa0dt2x8hcnys </p> */}
