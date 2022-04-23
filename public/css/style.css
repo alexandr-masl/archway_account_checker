@@ -125,7 +125,7 @@ hr {
   bottom: -1px !important;
   width: 100% !important;
   height: 2px !important;
-  background: linear-gradient(to right, #6372ff 0%, #5ca9fb 100%) !important;
+  background: linear-gradient(to right, #f96d27 0%, #e98a5a 100%) !important;
   content: "" !important;
   transition: width 0.2s !important;
 }
@@ -135,10 +135,10 @@ hr {
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
   background-color: #fff;
-  border-color: #608dfd;
+  border-color: #ee7839;
 }
 .navbar-default .navbar-toggle:hover > .icon-bar {
-  background-color: #608dfd;
+  background-color: #ee7839;
 }
 .section-title {
   margin-bottom: 70px;
@@ -166,8 +166,8 @@ hr {
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
   color: #fff;
-  background-color: #5ca9fb;
-  background-image: linear-gradient(to right, #5ca9fb 0%, #6372ff 100%);
+  background-color: #181819;
+  background-image: linear-gradient(to right, #f66e49 0%, #f29b65 100%);
   padding: 14px 34px;
   letter-spacing: 1px;
   margin: 0;
@@ -184,7 +184,7 @@ hr {
 .btn-custom.active {
   color: #fff;
   background-image: none;
-  background-color: #6372ff;
+  background-color: #6e5c4b;
 }
 .btn:active,
 .btn.active {

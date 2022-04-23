@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Get_Balance_Form } from "./components/get_balance";
+import { Navigation } from "./components/navigation";
 
 
 export default class App extends Component {
@@ -53,7 +54,7 @@ export default class App extends Component {
     if (!userAddress) {
       return (
         <div className="content">
-          <img src={logo} alt="logo" />
+          {/* <img src={logo} alt="logo" /> */}
 
           <div className="button-controls">
             <h2>
@@ -62,7 +63,8 @@ export default class App extends Component {
             {/* <button id="connect" className="btn btn-main" onClick={this.connectWallet}>Connect Wallet</button> */}
           </div>
           <div>
-            <Get_Balance_Form />
+            <Navigation/>
+            {/* <Get_Balance_Form /> */}
           </div>
 
         </div>
@@ -72,7 +74,7 @@ export default class App extends Component {
     // Connected
     return (
       <div className="content">
-        <img src={logo} alt="logo" />
+        {/* <img src={logo} alt="logo" /> */}
 
         {/* Counter Status Display */}
         {/* <div className="status-display">
@@ -86,8 +88,9 @@ export default class App extends Component {
           <button id="incrementer" className="btn btn-main" onClick={this.incrementCounter}>Increment Counter</button>
           <button id="resetter" className="btn btn-alt" onClick={this.resetCounter}>Reset Counter</button>
         </div> */}
+
         <div>
-          <Get_Balance_Form />
+          <Navigation />
         </div>
 
         {/* Loading */}
