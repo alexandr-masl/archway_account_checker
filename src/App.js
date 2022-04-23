@@ -64,7 +64,7 @@ export default class App extends Component {
           </div>
           <div>
             <Navigation/>
-            {/* <Get_Balance_Form /> */}
+            <Get_Balance_Form />
           </div>
 
         </div>
@@ -91,8 +91,8 @@ export default class App extends Component {
 
         <div>
           <Navigation />
+          <Get_Balance_Form />
         </div>
-
         {/* Loading */}
         {Loading(loadingMsg)}
 

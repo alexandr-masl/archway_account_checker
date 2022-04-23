@@ -81,7 +81,7 @@ export const Navigation = (props) => {
             className='collapse navbar-collapse'
             id='bs-example-navbar-collapse-1'
           >
-            <ul className='nav navbar-nav navbar-right'>
+            {/* <ul className='nav navbar-nav navbar-right'>
                 <li>
                     <a onClick={use_account_state} className='page-scroll'>
                     Accounts
@@ -95,7 +95,7 @@ export const Navigation = (props) => {
                 <li> 
                     <button id="connect" className="btn-custom" onClick={connectWallet}>Connect Wallet</button>
                 </li>
-            </ul>
+            </ul> */}
           </div>
         </div>
       </nav>
