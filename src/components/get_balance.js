@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 // init("user_sklvQNCX9AIjZ1VyPrKoJ");
 
-// import { SigningCosmWasmClient } from "@cosmjs/cosmwasm-stargate";
+import { SigningCosmWasmClient } from "@cosmjs/cosmwasm-stargate";
 // import { calculateFee, coin, GasPrice } from "@cosmjs/stargate";
 import { ConstantineInfo } from '../chain.info.constantine';
 
@@ -42,23 +42,43 @@ export const Get_Balance_Form = (props) => {
 
       const _balance = await cosm_wasm_client.getBalance(name, coin) 
       const _chain_id = await cosm_wasm_client.getChainId()
-      const _account = await cosm_wasm_client.getAccount(name)
 
-      const account_info = {
 
-        balance: _balance.amount.toString(),
-        chain_id: _chain_id.toString(),
-        acc_number: _account.accountNumber,
-        address: _account.address
+
+      if (!Number(_balance.amount)){
+
+        checkBalance({
+
+          balance: _balance.amount.toString(),
+          chain_id: _chain_id.toString()
+        })
+
       }
+      else{    
 
-      if (_account.pubkey){    
+        const _account = await cosm_wasm_client.getAccount(name.toLowerCase())
 
-        account_info["pubkey_type" ] = _account.pubkey.type
-        account_info["pubkey_value"] = _account.pubkey.value
-      }
+        console.log("ACCOUNT INFO ", name.toLowerCase())
+        console.log(_balance)
+
+        const account_info = {
+
+          balance: _balance.amount.toString(),
+          chain_id: _chain_id.toString()
+        }
+
+        if (_account && _account["accountNumber"])
+          account_info["acc_number"] = _account.accountNumber
+          account_info["address"] = _account.address
+
+        if (_account && _account.pubkey){    
+
+          account_info["pubkey_type" ] = _account.pubkey.type
+          account_info["pubkey_value"] = _account.pubkey.value
+        }
 
         checkBalance(account_info)
+      }
   
     } catch(err){ 
       
@@ -75,15 +95,27 @@ export const Get_Balance_Form = (props) => {
 
     const success_submit = (
 
-      <div className='section-title'>
-        <h2> Account Info</h2>
-        <p> Account Number: {balance_responce.acc_number} </p>
-        <p> Adress: {balance_responce.address} </p>
-        <p> Balance: {balance_responce.balance} UCONST </p>
-        <p> Chain Name: {balance_responce.chain_id} </p>
-        <p> Public key type: {balance_responce.pubkey_type} </p>
-        <p> Public key value: {balance_responce.pubkey_value} </p>
-      </div>
+      Number(balance_responce.balance) ?
+
+        <div className='section-title'>
+          <h2> Account Info</h2>
+          <p> Account Number: {balance_responce.acc_number} </p>
+          <p> Adress: {balance_responce.address} </p>
+          <p> Balance: {balance_responce.balance} UCONST </p>
+          <p> Chain Name: {balance_responce.chain_id} </p>
+          <p> Public key type: {balance_responce.pubkey_type} </p>
+          <p> Public key value: {balance_responce.pubkey_value} </p>
+        </div>
+
+        :
+
+          <div className='section-title'>
+          <h2> Account Info</h2>
+          <p> Adress: {name} </p>
+          <p> Balance: {balance_responce.balance} UCONST </p>
+          <p> Chain Name: {balance_responce.chain_id} </p>
+        </div>
+
     )
 
     const err_submit = (
