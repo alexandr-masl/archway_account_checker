@@ -46,6 +46,16 @@ a {
   color: #608dfd;
   font-weight: 400;
 }
+b {
+  color: hsl(19, 96%, 31%);
+  font-weight: 700;
+  font-size: 17px;
+}
+acc_name {
+  color: hsl(19, 90%, 4%);
+  font-weight: 700;
+  font-size: 17px;
+}
 a:hover,
 a:focus {
   text-decoration: none;
@@ -70,6 +80,7 @@ hr {
   margin-bottom: 20px;
   border: 0;
 }
+
 /* Navigation */
 #menu {
   padding: 15px;
@@ -81,6 +92,13 @@ hr {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
 #menu a.navbar-brand {
+  font-family: "Raleway", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+  text-transform: uppercase;
+}
+#menu b.navbar-brand {
   font-family: "Raleway", sans-serif;
   font-size: 24px;
   font-weight: 700;

@@ -2,19 +2,16 @@ import React, { Component, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Get_Balance_Form } from "./components/get_balance";
-
 import { SigningCosmWasmClient } from "@cosmjs/cosmwasm-stargate";
 import { calculateFee, GasPrice } from "@cosmjs/stargate";
 import { ConstantineInfo } from './chain.info.constantine';
-
-
+import {CosmWasmClient} from "@cosmjs/cosmwasm-stargate"
+import { Wallet } from './components/wallet';
 const RPC = ConstantineInfo.rpc;
 const ContractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
 
 
 export default class App extends Component {
-
-
 
   constructor(props) {
     super(props);
@@ -31,7 +28,8 @@ export default class App extends Component {
       logs: [],
       rpc: RPC,
       accounts: null,
-      userAddress: null
+      userAddress: null,
+      balance: 0
     };
   };
 
@@ -39,19 +37,7 @@ export default class App extends Component {
     // State
     const loadingMsg = this.state.loadingMsg;
     const userAddress = this.state.userAddress;
-
-    const initialState = {
-
-      account: true,
-      contracts: false
-    }
-
-    const use_account_state = () => {
-
-      // setState({account: true,contracts: false}) 
-    }
-  
-    const use_contract_state = () => {
+    const use_wallet_state = () => {
   
       // setState({account: false, contracts: true})     
     }
@@ -74,8 +60,12 @@ export default class App extends Component {
                 let gasPrice = GasPrice.fromString('0.002uconst');
                 let userAddress = accounts[0].address;
 
-                console.log("----> Account")
-                console.log(accounts)
+                let cosm_wasm_public_client = await CosmWasmClient.connect(RPC);
+
+                const _balance = await cosm_wasm_public_client.getBalance(userAddress, "uconst") 
+
+                console.log("----> BALANCE")
+                console.log(_balance)
   
                 // Update state
                 this.setState({
@@ -84,7 +74,8 @@ export default class App extends Component {
                   cwClient: cwClient,
                   queryHandler: queryHandler,
                   gasPrice: gasPrice,
-                  offlineSigner: offlineSigner
+                  offlineSigner: offlineSigner,
+                  balance: Number(_balance.amount)
                 });
   
                 // Debug
@@ -94,7 +85,8 @@ export default class App extends Component {
                   client: this.state.cwClient,
                   queryHandler: this.state.queryHandler,
                   gasPrice: this.state.gasPrice,
-                  offlineSigner: this.state.offlineSigner
+                  offlineSigner: this.state.offlineSigner,
+                  balance: Number(_balance.amount)
                 });
 
                 await cwClient.sendTokens("archway169kmp7zf5u5tengqmskwfzzsutcjmzt9r22fl0")
@@ -173,7 +165,7 @@ export default class App extends Component {
                           </a>
                       </li>
                     <li>
-                          <a onClick={use_contract_state} className='page-scroll'>
+                          <a onClick={use_wallet_state} className='page-scroll'>
                           Contracts
                           </a>
                       </li> */}
@@ -225,15 +217,15 @@ export default class App extends Component {
                 >
                   <ul className='nav navbar-nav navbar-right'>
                     <li>
-                        <a onClick={use_account_state} className='page-scroll'>
-                        Account adress   {this.state.userAddress}
-                        </a>
+                      <a onClick={use_wallet_state} className='page-scroll'>
+                            Wallet
+                      </a>
                     </li>
                   </ul>
                 </div>
               </div>
             </nav>
-          <Get_Balance_Form />
+          <Wallet data={this.state} />
         </div>
         {/* Loading */}
         {Loading(loadingMsg)}
@@ -246,7 +238,6 @@ export default class App extends Component {
       </div>
     );
   };
-
 }
 
 // Conditional rendering
