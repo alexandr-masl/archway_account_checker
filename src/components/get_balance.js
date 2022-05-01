@@ -69,48 +69,48 @@ export const Get_Balance_Form = (props) => {
       const _balance = await cosm_wasm_client.getBalance(name, coin) 
       const _chain_id = await cosm_wasm_client.getChainId()
 
-      const mnemonic =
-        "oak kitchen caught panel agent scare pulse abstract only tell protect occur";
+      // const mnemonic =
+      //   "oak kitchen caught panel agent scare pulse abstract only tell protect occur";
 
-        // Create a wallet
-      // const wallet = await new Secp256k1HdWallet(mnemonic);
+      //   // Create a wallet
+      // // const wallet = await new Secp256k1HdWallet(mnemonic);
 
-      // console.log(":::::: FROM MNEMONIC ")
-      // console.log(wallet);
+      // // console.log(":::::: FROM MNEMONIC ")
+      // // console.log(wallet);
 
-      const wallet_adress = "archway1stx7zdhtlpeah9qsw7959qvtwpywrmp7p6arks"
+      // const wallet_adress = "archway1stx7zdhtlpeah9qsw7959qvtwpywrmp7p6arks"
 
-      const algo = "secp256k1"
+      // const algo = "secp256k1"
 
-      const pub_key = "Agbm2GiSK3KhOpXPzic9FbYIfhwvh6EYyOZVCuv+N5ji"
+      // const pub_key = "Agbm2GiSK3KhOpXPzic9FbYIfhwvh6EYyOZVCuv+N5ji"
 
-      new Cosm().check()
+      // new Cosm().check()
 
-      const offln_signer = [
-        {
-          address: wallet_adress,
-          // Currently, only secp256k1 is supported.
-          algo: "secp256k1",
-          pubkey: pub_key,
-        },
-      ];
+      // const offln_signer = [
+      //   {
+      //     address: wallet_adress,
+      //     // Currently, only secp256k1 is supported.
+      //     algo: "secp256k1",
+      //     pubkey: pub_key,
+      //   },
+      // ];
 
-      const offline_sign = new Cosm(wallet_adress, pub_key)
-
-
-      let cwClient = await SigningCosmWasmClient.connectWithSigner(RPC, offline_sign, {gasPrice: gasPrice});
-
-      console.log("::::::::::::::::: CW CLIENT INFO ")
-      console.log(cwClient);
+      // const offline_sign = new Cosm(wallet_adress, pub_key)
 
 
-      // let accounts = await client.getAccounts();
+      // let cwClient = await SigningCosmWasmClient.connectWithSigner(RPC, offline_sign, {gasPrice: gasPrice});
 
-      const sent_tokens = await cwClient.sendTokens("archway169kmp7zf5u5tengqmskwfzzsutcjmzt9r22fl0", "archway1ms4pgv3umf52rjy6zu5rqgyfsaemr6e9yg5y4w", [{ amount: "7777", denom: "uconst" }], "auto", "test transfer")
+      // console.log("::::::::::::::::: CW CLIENT INFO ")
+      // console.log(cwClient);
 
 
-      console.log("::::::::::::::::: NEW CLIENT INFO ")
-      console.log(sent_tokens);
+      // // let accounts = await client.getAccounts();
+
+      // const sent_tokens = await cwClient.sendTokens("archway169kmp7zf5u5tengqmskwfzzsutcjmzt9r22fl0", "archway1ms4pgv3umf52rjy6zu5rqgyfsaemr6e9yg5y4w", [{ amount: "7777", denom: "uconst" }], "auto", "test transfer")
+
+
+      // console.log("::::::::::::::::: NEW CLIENT INFO ")
+      // console.log(sent_tokens);
 
       if (!Number(_balance.amount)){
 
@@ -188,10 +188,10 @@ export const Get_Balance_Form = (props) => {
 
         <h2> Account Info</h2>
 
-        <p className="text-danger" >
+        {/* <p className="text-danger" > */}
             
             {balance_responce.err}
-        </p> 
+        {/* </p>  */}
       </div>
     )
 
@@ -217,7 +217,40 @@ export const Get_Balance_Form = (props) => {
                 <p> For example u can try to input this adress: archway1d7krrujhwlkjd5mmv5g6hnqpzpa0dt2x8hcnys </p>
                 {/* <p> archway1d7krrujhwlkjd5mmv5g6hnqpzpa0dt2x8hcnys </p> */}
               </div>
-              <form name='sentMessage' validate onSubmit={handleSubmit}>
+
+
+
+
+             <div id='send_tokens'>
+              <div className='container' >
+                  <form name='sentMessage' validate onSubmit={handleSubmit}>
+
+                      <ul className='nav navbar-nav navbar-left' >
+
+                          <li>
+                              <input
+                                  type='text'
+                                  id='name'
+                                  name='name'
+                                  className='send-tokens-form'
+                                  placeholder='input account adress'
+                                  required
+                                  onChange={handleChange}
+                              />
+                          </li>
+                          <li>
+                              <p> "" </p>
+                          </li>
+                          
+                          <li> 
+                              <button id="connect" className="check-btn" type='submit' validate onSubmit={handleSubmit} >Get account info</button>
+                          </li>
+                      </ul>
+                  </form>
+              </div>
+            </div>
+
+              {/* <form name='sentMessage' validate onSubmit={handleSubmit}>
 
 
                 <div className='row'>
@@ -243,7 +276,12 @@ export const Get_Balance_Form = (props) => {
                   get account info
                 </button>
 
-              </form>
+              </form> */}
+
+
+
+
+
             </div>
           </div>
          
