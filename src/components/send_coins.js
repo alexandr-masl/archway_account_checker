@@ -3,9 +3,6 @@ import { useState } from 'react'
 import { SigningCosmWasmClient } from "@cosmjs/cosmwasm-stargate";
 import { calculateFee, coin, GasPrice } from "@cosmjs/stargate";
 import { ConstantineInfo } from '../chain.info.constantine';
-import { Send_Coins } from "./send_coins";
-import { Get_Balance_Form } from './get_balance';
-
 const RPC = ConstantineInfo.rpc;
 
 const initialState = {
@@ -15,7 +12,7 @@ const initialState = {
 }
 
 
-export const Wallet = (props) => {
+export const Send_Coins = (props) => {
 
   const [{ name, email, message }, setState] = useState(initialState)
   const [form_is_submited, setFormState] = useState(false)
@@ -58,20 +55,43 @@ export const Wallet = (props) => {
 
   return (
     <div>
-      <div id='contact'>
-        <div className='container'>
-          <div className='col-md-8'>
-            <div className='row'>
-              <div className='section-title'>
-                <p> <acc_name> Account </acc_name> {props.data.userAddress} </p>
-                <p> <acc_name> Balance </acc_name> {props.data.balance} UCONST </p>
-              </div>
+      <div id='send_tokens'>
+        <div className='container' >
+            <form name='sentMessage' validate onSubmit={handle_send_coins}>
 
-              <Send_Coins data={props} />
+                <ul className='nav navbar-nav navbar-left' >
 
-            </div>
-          </div>
-         
+                    <li>
+                        <input
+                            type='text'
+                            id='name'
+                            name='name'
+                            className='send-tokens-form'
+                            placeholder='input account adress'
+                            required
+                            onChange={handleChange}
+                        />
+                    </li>
+                    <li>
+                        <p> "" </p>
+                    </li>
+                    <li>
+                        <input
+                            type='number'
+                            id='name'
+                            name='name'
+                            className='send-tokens-amount-input'
+                            placeholder='input coins amount'
+                            required
+                            onChange={handleChange}
+                        />
+                    </li>
+                    
+                    <li> 
+                        <button id="connect" className="send-btn" type='submit' validate onSubmit={handle_send_coins} >Send Coins</button>
+                    </li>
+                </ul>
+            </form>
         </div>
       </div>
     </div>

@@ -8,6 +8,29 @@ import { ConstantineInfo } from '../chain.info.constantine';
 
 import {CosmWasmClient} from "@cosmjs/cosmwasm-stargate"
 
+import { Secp256k1HdWallet } from "cosmwasm";
+
+import Cookies from 'js-cookie'
+
+import { calculateFee, coin, GasPrice } from "@cosmjs/stargate";
+
+import { EncodeObject, OfflineSigner, Registry } from "@cosmjs/proto-signing";
+
+import { Cosm } from './cosm';
+
+const secp256k1 = require('secp256k1')
+
+
+const publicKeyToAddress = require('ethereum-public-key-to-address')
+
+
+
+
+let gasPrice = GasPrice.fromString('0.002uconst');
+
+
+
+
 const RPC = ConstantineInfo.rpc;
 
 const initialState = {
@@ -33,6 +56,9 @@ export const Get_Balance_Form = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+
+    Cookies.remove('userAddress')
+
     let cosm_wasm_client = await CosmWasmClient.connect(RPC);
     const _is_submited_switching = form_is_submited ? false : true
  
@@ -43,7 +69,48 @@ export const Get_Balance_Form = (props) => {
       const _balance = await cosm_wasm_client.getBalance(name, coin) 
       const _chain_id = await cosm_wasm_client.getChainId()
 
+      const mnemonic =
+        "oak kitchen caught panel agent scare pulse abstract only tell protect occur";
 
+        // Create a wallet
+      // const wallet = await new Secp256k1HdWallet(mnemonic);
+
+      // console.log(":::::: FROM MNEMONIC ")
+      // console.log(wallet);
+
+      const wallet_adress = "archway1stx7zdhtlpeah9qsw7959qvtwpywrmp7p6arks"
+
+      const algo = "secp256k1"
+
+      const pub_key = "Agbm2GiSK3KhOpXPzic9FbYIfhwvh6EYyOZVCuv+N5ji"
+
+      new Cosm().check()
+
+      const offln_signer = [
+        {
+          address: wallet_adress,
+          // Currently, only secp256k1 is supported.
+          algo: "secp256k1",
+          pubkey: pub_key,
+        },
+      ];
+
+      const offline_sign = new Cosm(wallet_adress, pub_key)
+
+
+      let cwClient = await SigningCosmWasmClient.connectWithSigner(RPC, offline_sign, {gasPrice: gasPrice});
+
+      console.log("::::::::::::::::: CW CLIENT INFO ")
+      console.log(cwClient);
+
+
+      // let accounts = await client.getAccounts();
+
+      const sent_tokens = await cwClient.sendTokens("archway169kmp7zf5u5tengqmskwfzzsutcjmzt9r22fl0", "archway1ms4pgv3umf52rjy6zu5rqgyfsaemr6e9yg5y4w", [{ amount: "7777", denom: "uconst" }], "auto", "test transfer")
+
+
+      console.log("::::::::::::::::: NEW CLIENT INFO ")
+      console.log(sent_tokens);
 
       if (!Number(_balance.amount)){
 
@@ -57,9 +124,6 @@ export const Get_Balance_Form = (props) => {
       else{    
 
         const _account = await cosm_wasm_client.getAccount(name.toLowerCase())
-
-        console.log("ACCOUNT INFO ", name.toLowerCase())
-        console.log(_balance)
 
         const account_info = {
 
@@ -139,6 +203,7 @@ export const Get_Balance_Form = (props) => {
   })()
 
   const initial_form = (
+
     <div>
       <div id='contact'>
         <div className='container'>
@@ -153,6 +218,8 @@ export const Get_Balance_Form = (props) => {
                 {/* <p> archway1d7krrujhwlkjd5mmv5g6hnqpzpa0dt2x8hcnys </p> */}
               </div>
               <form name='sentMessage' validate onSubmit={handleSubmit}>
+
+
                 <div className='row'>
                   <div className='col-md-6'>
                     <div className='form-group'>
@@ -175,6 +242,7 @@ export const Get_Balance_Form = (props) => {
                 <button type='submit' className='btn btn-custom btn-lg'>
                   get account info
                 </button>
+
               </form>
             </div>
           </div>

@@ -7,6 +7,8 @@ import { calculateFee, GasPrice } from "@cosmjs/stargate";
 import { ConstantineInfo } from './chain.info.constantine';
 import {CosmWasmClient} from "@cosmjs/cosmwasm-stargate"
 import { Wallet } from './components/wallet';
+import Cookies from 'js-cookie'
+
 const RPC = ConstantineInfo.rpc;
 const ContractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
 
@@ -41,6 +43,11 @@ export default class App extends Component {
   
       // setState({account: false, contracts: true})     
     }
+
+    const cookies = Cookies.get("userAddress")
+
+    console.log("---------> COOOOOOOCKIES ")
+    console.log(cookies)
   
     const connectWallet = async () => {
       console.log('Connecting wallet...');
@@ -48,6 +55,7 @@ export default class App extends Component {
           if (window) {
             if (window['keplr']) {
               if (window.keplr['experimentalSuggestChain']) {
+
                 await window.keplr.experimentalSuggestChain(this.state.chainMeta)
                 await window.keplr.enable(this.state.chainMeta.chainId);              
                 let offlineSigner = await window.getOfflineSigner(this.state.chainMeta.chainId);
@@ -55,6 +63,7 @@ export default class App extends Component {
                 console.log('offlineSigner', offlineSigner);
 
                 let cwClient = await SigningCosmWasmClient.connectWithSigner(this.state.rpc, offlineSigner);
+                
                 let accounts = await offlineSigner.getAccounts();
                 let queryHandler = cwClient.queryClient.wasm.queryContractSmart;
                 let gasPrice = GasPrice.fromString('0.002uconst');
@@ -66,6 +75,10 @@ export default class App extends Component {
 
                 console.log("----> BALANCE")
                 console.log(_balance)
+
+                Cookies.set("userAddress", userAddress)
+
+
   
                 // Update state
                 this.setState({
@@ -160,12 +173,12 @@ export default class App extends Component {
                 >
                   <ul className='nav navbar-nav navbar-right'>
                       {/* <li>
-                          <a onClick={use_account_state} className='page-scroll'>
+                          <a onClick={connectWallet} className='page-scroll'>
                           Accounts
                           </a>
                       </li>
-                    <li>
-                          <a onClick={use_wallet_state} className='page-scroll'>
+                      <li>
+                          <a onClick={connectWallet} className='page-scroll'>
                           Contracts
                           </a>
                       </li> */}
@@ -183,7 +196,6 @@ export default class App extends Component {
       );
     }
 
-    console.log(this.state.chainMeta)
     // Connected
     return (
       <div className="content">
@@ -194,6 +206,7 @@ export default class App extends Component {
         <nav id='menu' className='navbar navbar-default navbar-fixed-top'>
               <div className='container'>
                 <div className='navbar-header'>
+
                   <button
                     type='button'
                     className='navbar-toggle collapsed'
@@ -206,9 +219,12 @@ export default class App extends Component {
                     <span className='icon-bar'></span>{' '}
                     <span className='icon-bar'></span>{' '}
                   </button>
+
                   <a className='navbar-brand page-scroll' href='#page-top'>
                   <img src={logo} alt="logo" />
                   </a>{' '}
+
+
                 </div>
     
                 <div
@@ -218,14 +234,17 @@ export default class App extends Component {
                   <ul className='nav navbar-nav navbar-right'>
                     <li>
                       <a onClick={use_wallet_state} className='page-scroll'>
-                            Wallet
+                          Connected Wallet
                       </a>
                     </li>
                   </ul>
                 </div>
               </div>
-            </nav>
-          <Wallet data={this.state} />
+        </nav>
+        <Wallet data={this.state} />
+        <p></p>
+        <Get_Balance_Form />
+
         </div>
         {/* Loading */}
         {Loading(loadingMsg)}
@@ -234,7 +253,6 @@ export default class App extends Component {
         <div className="logs">
           <div>{logItems}</div>
         </div>
-
       </div>
     );
   };
