@@ -5,18 +5,18 @@ import { calculateFee, coin, GasPrice } from "@cosmjs/stargate";
 import { ConstantineInfo } from '../chain.info.constantine';
 const RPC = ConstantineInfo.rpc;
 
+
 const initialState = {
-  name: '',
-  // email: '',
-  // message: '',
+  account_adress: '',
+  tokens_amount: 0,
 }
 
 
 export const Send_Coins = (props) => {
 
-  const [{ name, email, message }, setState] = useState(initialState)
-  const [form_is_submited, setFormState] = useState(false)
-  const [balance_responce, checkBalance] = useState({})
+  const [{ account_adress, tokens_amount }, setState] = useState(initialState)
+  const [sending_tokens, setFormState] = useState(false)
+  const [sending_tokens_info, setSendingTokensInfo] = useState({})
 
 
   const handleChange = (e) => {
@@ -26,31 +26,78 @@ export const Send_Coins = (props) => {
   }
 
   const handle_send_coins = async (e) => {
-    e.preventDefault()
-    // let queryHandler = cwClient.queryClient.wasm.queryContractSmart;
 
-    let offlineSigner = await window.getOfflineSigner(props.data.chainMeta.chainId)
-    let gasPrice = GasPrice.fromString('0.002uconst');
+    try{   
+      e.preventDefault()
 
-    let cwClient = await SigningCosmWasmClient.connectWithSigner(props.data.rpc, offlineSigner, {gasPrice: gasPrice});
-    let accounts = await offlineSigner.getAccounts();
+      setFormState(true)
+      setSendingTokensInfo({info: "Sending tokens..."})
 
-    // console.log("====> OFFLINE SIGNER")
-    // console.log(offlineSigner)
+      let offlineSigner = await window.getOfflineSigner(props.data.chainMeta.chainId)
+      let gasPrice = GasPrice.fromString('0.002uconst');
+      let cwClient = await SigningCosmWasmClient.connectWithSigner(props.data.rpc, offlineSigner, {gasPrice: gasPrice});
+      // let accounts = await offlineSigner.getAccounts();
 
-    // console.log("==========>>> SENDING TOKENS FROM ", props.data.userAddress, "TO", name)
+      console.log("==========>>> SENDING TOKENS FROM ", props.data.userAddress, "TO", account_adress)
 
-    // const sent_tokens = await cwClient.sendTokens(props.data.userAddress, name, [{ amount: "7890", denom: "uconst" }], "auto", "test transfer")
+      const sent_tokens = await cwClient.sendTokens(props.data.userAddress, account_adress, [{ amount: tokens_amount, denom: "uconst" }], "auto", "test transfer")
 
-    // console.log(sent_tokens)
+      console.log(sent_tokens)
 
-    const upload = await cwClient.upload(props.data.userAddress, name, [{ amount: "7890", denom: "uconst" }], "auto", "test transfer")
+      console.log('HASH')
+      console.log(sent_tokens.transactionHash)
+
+
+
+      setSendingTokensInfo({
+
+        info: "Successfully sent ✔️",
+        data: sent_tokens.rawLog,
+        transaction_hash: "Transaction HASH:  "+ sent_tokens.transactionHash,
+        transaction_height: "Transaction number:  "+ sent_tokens.height,
+        transaction_gas_used: "Gas used:  "+ sent_tokens.gasUsed,
+        transaction_gas_wanted: "Gas wanted:  "+ sent_tokens.gasWanted
+      })
+    }
+    catch(err){
+
+      setSendingTokensInfo({
+
+        info: "⚠️Transaction failed..",
+        transaction_hash: err.toString(),
+      })
+
+      console.log('SEND TOKEN ERRRRRRRRRRR')
+      console.log(err)
+    }
   }
 
-//   console.log("====> WALLET PROPS")
-//   console.log(props)
+  const handle_resend_tokens = (e) => {
+      
+    e.preventDefault()
+    setFormState(false)
+  }
 
-// archway1stx7zdhtlpeah9qsw7959qvtwpywrmp7p6arks
+  if (sending_tokens){
+
+    return (
+      <div id='send_tokens'>
+        <div className='container' >
+          <div className='section-title'>
+            <p> {sending_tokens_info.info} </p>
+            <p> {sending_tokens_info.transaction_hash} </p>
+            <p> {sending_tokens_info.transaction_height} </p>
+            <p> {sending_tokens_info.transaction_gas_used} </p>
+            <p> {sending_tokens_info.transaction_gas_wanted} </p>
+          </div>
+          <form name='sentMessage' validate onSubmit={handle_resend_tokens}>
+                  <button type='submit' className='btn btn-custom btn-lg'>
+                    send more tokens
+                  </button>
+          </form>
+        </div>
+      </div>)
+  }
 
 
   return (
@@ -64,8 +111,8 @@ export const Send_Coins = (props) => {
                     <li>
                         <input
                             type='text'
-                            id='name'
-                            name='name'
+                            id='account_adress'
+                            name='account_adress'
                             className='send-tokens-form'
                             placeholder='input account adress'
                             required
@@ -78,8 +125,8 @@ export const Send_Coins = (props) => {
                     <li>
                         <input
                             type='number'
-                            id='name'
-                            name='name'
+                            id='tokens_amount'
+                            name='tokens_amount'
                             className='send-tokens-amount-input'
                             placeholder='input coins amount'
                             required

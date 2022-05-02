@@ -243,7 +243,7 @@ export default class App extends Component {
         </nav>
         <Wallet data={this.state} />
         <p></p>
-        <Get_Balance_Form />
+        <Get_Balance_Form data={this.state} />
 
         </div>
         {/* Loading */}

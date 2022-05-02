@@ -67,7 +67,7 @@ export const Wallet = (props) => {
                 <p> <acc_name> Balance </acc_name> {props.data.balance} UCONST </p>
               </div>
 
-              <Send_Coins data={props} />
+              <Send_Coins data={props.data} />
 
             </div>
           </div>
