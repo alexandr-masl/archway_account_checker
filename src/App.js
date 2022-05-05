@@ -8,6 +8,7 @@ import { ConstantineInfo } from './chain.info.constantine';
 import {CosmWasmClient} from "@cosmjs/cosmwasm-stargate"
 import { Wallet } from './components/wallet';
 import Cookies from 'js-cookie'
+import { Stake_Coins } from './components/stake_coins';
 
 const RPC = ConstantineInfo.rpc;
 const ContractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
@@ -194,6 +195,8 @@ export default class App extends Component {
               </div>
             </nav>
             <Get_Balance_Form />
+            <p></p>
+            <Stake_Coins data={this.props.data} />
           </div>
 
         </div>
