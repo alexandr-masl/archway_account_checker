@@ -38,11 +38,22 @@ export const Send_Coins = (props) => {
       let cwClient = await SigningCosmWasmClient.connectWithSigner(props.data.rpc, offlineSigner, {gasPrice: gasPrice});
       // let accounts = await offlineSigner.getAccounts();
 
+      // delegateTokens
+
+      const delegate_tokens = await cwClient.delegateTokens(props.data.userAddress, account_adress, { amount: tokens_amount, denom: "uconst" }, "auto", "test delegate")
+
+      console.log("====> Delegate Tokens")
+      console.log(delegate_tokens)
+
+
+
       console.log("==========>>> SENDING TOKENS FROM ", props.data.userAddress, "TO", account_adress)
 
       const sent_tokens = await cwClient.sendTokens(props.data.userAddress, account_adress, [{ amount: tokens_amount, denom: "uconst" }], "auto", "test transfer")
 
       console.log(sent_tokens)
+      
+
 
       console.log('HASH')
       console.log(sent_tokens.transactionHash)
@@ -84,11 +95,13 @@ export const Send_Coins = (props) => {
       <div id='send_tokens'>
         <div className='container' >
           <div className='section-title'>
+            <p> </p>
+            <p> </p>
             <p> {sending_tokens_info.info} </p>
-            <p> {sending_tokens_info.transaction_hash} </p>
-            <p> {sending_tokens_info.transaction_height} </p>
-            <p> {sending_tokens_info.transaction_gas_used} </p>
-            <p> {sending_tokens_info.transaction_gas_wanted} </p>
+            <p> <acc_name> {sending_tokens_info.transaction_hash} </acc_name> </p>
+            <p> <acc_name> {sending_tokens_info.transaction_height} </acc_name> </p>
+            <p> <acc_name> {sending_tokens_info.transaction_gas_used} </acc_name> </p>
+            <p> <acc_name> {sending_tokens_info.transaction_gas_wanted} </acc_name> </p>
           </div>
           <form name='sentMessage' validate onSubmit={handle_resend_tokens}>
                   <button type='submit' className='btn btn-custom btn-lg'>

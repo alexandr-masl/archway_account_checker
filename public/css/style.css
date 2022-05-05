@@ -495,6 +495,18 @@ header .intro-text {
   color: #777;
 }
 
+/* Transactions History */
+
+#transactions_history {
+  
+  display: inline-block;
+  padding: 10px 0 25px;
+  border-radius: 25px;
+  background-color: rgba(248, 247, 246, 0.35);
+  /* background: linear-gradient(to right, #f6f3f1 0%, #f5e1cd 100%); */
+  /* color: rgba(255, 255, 255, 0.937); */
+}
+
 /* Contact Section */
 
 #contact {

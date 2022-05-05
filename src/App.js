@@ -17,6 +17,13 @@ export default class App extends Component {
 
   constructor(props) {
     super(props);
+
+    const cookies_user_adress = Cookies.get("userAddress")
+
+    console.log("---------> COOOOOOOCKIES ")
+    console.log(cookies_user_adress)
+
+
     this.state = {
       contract: ContractAddress,
       counter: null,
@@ -30,7 +37,7 @@ export default class App extends Component {
       logs: [],
       rpc: RPC,
       accounts: null,
-      userAddress: null,
+      userAddress: cookies_user_adress ? cookies_user_adress : null,
       balance: 0
     };
   };
@@ -39,15 +46,12 @@ export default class App extends Component {
     // State
     const loadingMsg = this.state.loadingMsg;
     const userAddress = this.state.userAddress;
+
+
     const use_wallet_state = () => {
   
       // setState({account: false, contracts: true})     
     }
-
-    const cookies = Cookies.get("userAddress")
-
-    console.log("---------> COOOOOOOCKIES ")
-    console.log(cookies)
   
     const connectWallet = async () => {
       console.log('Connecting wallet...');
