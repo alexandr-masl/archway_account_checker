@@ -30,7 +30,7 @@ export const Get_Balance_Form = (props) => {
     const account_info = await new CosmWasm_Client().get_account_info(name)
 
     if (account_info.err)
-      setAccountInfo({err: account_info.err})
+      setAccountInfo((account_info.err).toString())
 
     setAccountInfo(account_info)
     setFormState(_is_submited_switching)
@@ -93,7 +93,9 @@ export const Get_Balance_Form = (props) => {
                   Here you can get a full public information of any Archway-network account, just input the account adress
                 </p>
                 <p> For example u can try to input this adress: archway1d7krrujhwlkjd5mmv5g6hnqpzpa0dt2x8hcnys </p>
+                {/* <p> archway1d7krrujhwlkjd5mmv5g6hnqpzpa0dt2x8hcnys </p> */}
               </div>
+
              <div id='send_tokens'>
               <div className='container' >
                   <form name='sentMessage' validate onSubmit={handleSubmit}>

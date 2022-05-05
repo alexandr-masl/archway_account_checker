@@ -8,7 +8,6 @@ const stakeCurrency = ConstantineInfo.stakeCurrency.coinMinimalDenom
 
 export class CosmWasm_Client {
 
-
     public async get_account_info(account_adress: string){        
         try { 
 
@@ -27,18 +26,11 @@ export class CosmWasm_Client {
                 pubkey_value: _account && _account.pubkey ? _account.pubkey.value : null
             }
 
-
-            console.log("====> CosmWasm_Client | Account INFO")
-            console.log(account_info)
-
-
-
             return account_info
-
 
         } catch(err){ 
 
-            return({err: "Account info Error "+ err})
+            return({err: "GET ACCOUNT INFO ⚠️ "+ err})
         }
     }
 }

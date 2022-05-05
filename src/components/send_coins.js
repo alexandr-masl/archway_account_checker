@@ -38,14 +38,10 @@ export const Send_Coins = (props) => {
       let cwClient = await SigningCosmWasmClient.connectWithSigner(props.data.rpc, offlineSigner, {gasPrice: gasPrice});
       // let accounts = await offlineSigner.getAccounts();
 
-      // delegateTokens
-
       const delegate_tokens = await cwClient.delegateTokens(props.data.userAddress, account_adress, { amount: tokens_amount, denom: "uconst" }, "auto", "test delegate")
 
       console.log("====> Delegate Tokens")
       console.log(delegate_tokens)
-
-
 
       console.log("==========>>> SENDING TOKENS FROM ", props.data.userAddress, "TO", account_adress)
 
