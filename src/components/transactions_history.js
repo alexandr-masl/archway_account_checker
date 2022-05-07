@@ -16,11 +16,6 @@ export const Transactions_history = (props) => {
     );
 
 
-    console.log("TEst ITems")
-    console.log(items)
-
-
-
     return (
 
         <div>

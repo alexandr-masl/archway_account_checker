@@ -78,13 +78,8 @@ export default class App extends Component {
 
                 const _balance = await cosm_wasm_public_client.getBalance(userAddress, "uconst") 
 
-                console.log("----> BALANCE")
-                console.log(_balance)
-
                 Cookies.set("userAddress", userAddress)
 
-
-  
                 // Update state
                 this.setState({
                   accounts: accounts,
@@ -106,8 +101,6 @@ export default class App extends Component {
                   offlineSigner: this.state.offlineSigner,
                   balance: Number(_balance.amount)
                 });
-
-                await cwClient.sendTokens("archway169kmp7zf5u5tengqmskwfzzsutcjmzt9r22fl0")
   
               } else {
                 console.warn('Error access experimental features, please update Keplr');
@@ -196,7 +189,7 @@ export default class App extends Component {
             </nav>
             <Get_Balance_Form />
             <p></p>
-            <Stake_Coins data={this.props.data} />
+            <Stake_Coins data={this.state} />
           </div>
 
         </div>
@@ -249,6 +242,8 @@ export default class App extends Component {
               </div>
         </nav>
         <Wallet data={this.state} />
+        <p></p>
+        <Stake_Coins data={this.state} />
         <p></p>
         <Get_Balance_Form data={this.state} />
 

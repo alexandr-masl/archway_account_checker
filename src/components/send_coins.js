@@ -1,9 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
-import { SigningCosmWasmClient } from "@cosmjs/cosmwasm-stargate";
-import { calculateFee, coin, GasPrice } from "@cosmjs/stargate";
-import { ConstantineInfo } from '../chain.info.constantine';
-const RPC = ConstantineInfo.rpc;
+import { Signed_CosmWasm_Client } from '../core/signed_cosmwasm_client'
+
 
 
 const initialState = {
@@ -34,37 +32,30 @@ export const Send_Coins = (props) => {
       setSendingTokensInfo({info: "Sending tokens..."})
 
       let offlineSigner = await window.getOfflineSigner(props.data.chainMeta.chainId)
-      let gasPrice = GasPrice.fromString('0.002uconst');
-      let cwClient = await SigningCosmWasmClient.connectWithSigner(props.data.rpc, offlineSigner, {gasPrice: gasPrice});
-      // let accounts = await offlineSigner.getAccounts();
+        
+      const sent_tokens = await new Signed_CosmWasm_Client().send_tokens(props.data.userAddress, account_adress, tokens_amount, offlineSigner)
 
-      const delegate_tokens = await cwClient.delegateTokens(props.data.userAddress, account_adress, { amount: tokens_amount, denom: "uconst" }, "auto", "test delegate")
+      if (sent_tokens.err){
 
-      console.log("====> Delegate Tokens")
-      console.log(delegate_tokens)
+        return (setSendingTokensInfo({
 
-      console.log("==========>>> SENDING TOKENS FROM ", props.data.userAddress, "TO", account_adress)
+          info: "⚠️Transaction failed..",
+          transaction_hash: sent_tokens.err.toString(),
+        }))
 
-      const sent_tokens = await cwClient.sendTokens(props.data.userAddress, account_adress, [{ amount: tokens_amount, denom: "uconst" }], "auto", "test transfer")
-
-      console.log(sent_tokens)
-      
-
-
-      console.log('HASH')
-      console.log(sent_tokens.transactionHash)
-
+      }
 
 
       setSendingTokensInfo({
 
         info: "Successfully sent ✔️",
         data: sent_tokens.rawLog,
-        transaction_hash: "Transaction HASH:  "+ sent_tokens.transactionHash,
-        transaction_height: "Transaction number:  "+ sent_tokens.height,
-        transaction_gas_used: "Gas used:  "+ sent_tokens.gasUsed,
-        transaction_gas_wanted: "Gas wanted:  "+ sent_tokens.gasWanted
+        transaction_hash: "Transaction HASH:  "+ sent_tokens.transaction_hash,
+        transaction_height: "Transaction number:  "+ sent_tokens.transaction_height,
+        transaction_gas_used: "Gas used:  "+ sent_tokens.transaction_gas_used,
+        transaction_gas_wanted: "Gas wanted:  "+ sent_tokens.transaction_gas_wanted
       })
+
     }
     catch(err){
 

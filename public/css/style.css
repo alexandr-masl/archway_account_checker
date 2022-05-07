@@ -21,8 +21,13 @@ h2 {
   color: #333;
 }
 h3 {
-  font-size: 20px;
+  /* font-size: 15px;
   font-weight: 600;
+  color: #333; */
+  text-transform: uppercase;
+  margin: 0 0 20px;
+  font-weight: 500;
+  font-size: 36px;
   color: #333;
 }
 h4 {
@@ -115,6 +120,7 @@ hr {
   border-radius: 0;
   margin: 9px 20px 0;
 }
+
 #menu.navbar-default .navbar-nav > li > a:after {
   display: block;
   position: absolute;
@@ -296,6 +302,11 @@ header .intro-text {
   padding: 10px 0 25px;
   border-radius: 25px;
   background-color: rgba(248, 247, 246, 0.35);
+  position: relative;
+
+  /* margin-right: 100px; */
+  left: 0px;
+
   /* background: linear-gradient(to right, #f6f3f1 0%, #f5e1cd 100%); */
   /* color: rgba(255, 255, 255, 0.937); */
 }
@@ -321,10 +332,11 @@ header .intro-text {
 }
 #send_tokens h2 {
   color: #fff;
-  margin-top: 10px;
+  margin-top: 20px;
   margin-bottom: 15px;
   padding-bottom: 15px;
 }
+
 #send_tokens .section-title h2::after {
   position: absolute;
   content: "";
@@ -334,13 +346,7 @@ header .intro-text {
   bottom: 0;
   left: 70px;
 }
-#send_tokens h3 {
-  color: #fff;
-  margin-top: 80px;
-  margin-bottom: 25px;
-  padding-bottom: 20px;
-  font-weight: 400;
-}
+
 #send_tokens form {
   padding-top: 20px;
 }
@@ -351,7 +357,7 @@ header .intro-text {
 
 #send_tokens .send-btn {
   display: inline-block;
-  margin-left: 70px;
+  /* margin-right: 0px; */
   position: relative;
 
   left: 100px;
@@ -374,7 +380,7 @@ header .intro-text {
 
 #send_tokens .check-btn {
   display: inline-block;
-  margin-left: 70px;
+  margin-right: 0px;
   position: relative;
 
   left: 100px;
@@ -407,6 +413,7 @@ header .intro-text {
 
   display: inline-block;
   position: relative;
+
   width: 100%;
   padding: 6px 172px;
   font-size: 19px;
@@ -538,10 +545,22 @@ header .intro-text {
 }
 #contact h3 {
   color: #fff;
-  margin-top: 80px;
-  margin-bottom: 25px;
-  padding-bottom: 20px;
-  font-weight: 400;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  /* font-weight: 400; */
+}
+
+#contact validator_name {
+  color: rgb(82, 46, 227);
+  margin-top: 10px;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  /* color: rgb(18, 36, 239); */
+  /* margin-top: 80px; */
+  /* margin-bottom: 25px; */
+  /* padding-bottom: 20px; */
+  /* font-weight: 400; */
 }
 #contact form {
   padding-top: 20px;

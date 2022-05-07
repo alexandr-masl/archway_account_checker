@@ -14,7 +14,7 @@ export const Stake_Coins = (props) => {
                <h2> Stake Tokens</h2>
               </div>
               <Stake_Validator data={props.data} />
-              <p> </p>
+              <p></p>
             </div>
           </div>
         </div>
