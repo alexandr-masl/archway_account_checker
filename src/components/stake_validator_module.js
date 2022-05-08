@@ -121,89 +121,63 @@ export const Stake_Validator = (props) => {
         // </div>
     }
 
-    // const items = validators.map((item, index) =>{
+    const items = validators.map((item, index) =>{
 
-    //     const item_name = "---> Index "+ index
+        const item_name = "---> Index "+ index
 
-    //     console.log(item_name)
+        console.log(item_name)
 
-    //     return (
-
+        return (
             
+            <li  key={item} >
 
-    //         // <iframe src="https://www.youtube.com/embed/cWDJoK8zw58" />
+                <div>
+                    <div id='send_tokens'>
+                        <div className='container' >
+                            <div className='col-md-8'>
+                                <div className='row'>
 
-    //     //         <li  key={item} >
+                                    <form name='sentMessage' validate onSubmit={stake_coins}>
+                                        <ul className='nav navbar-nav navbar-left' >
+                                            
+                                            <li>
+                                                <h3> {item.description.moniker} </h3>
+                                            </li>
+                                            <li>
+                                                <p> </p>
+                                            </li>
+                                            <li>
+                                                <input
+                                                    type='number'
+                                                    id='tokens_amount'
+                                                    name='tokens_amount'
+                                                    className='send-tokens-amount-input'
+                                                    placeholder= 'input coins amount '
+                                                    required
+                                                    // onChange={handleChange}
+                                                />
+                                            </li>
+                                            
+                                            <li> 
+                                                <button id="connect" className="send-btn" type='submit' >Delegate Tokens</button>
+                                            </li>
+                                        </ul>
+                                    
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    //     //             <div>
-    //     //                 <div id='send_tokens'>
-    //     //                     <div className='container' >
-    //     //                         <div className='col-md-8'>
-    //     //                             <div className='row'>
-
-    //     //                                 <form name='sentMessage' validate onSubmit={stake_coins}>
-    //     //                                     <ul className='nav navbar-nav navbar-left' >
-                                                
-    //     //                                         <li>
-    //     //                                             <h3> {item.description.moniker} </h3>
-    //     //                                         </li>
-    //     //                                         <li>
-    //     //                                             <p> </p>
-    //     //                                         </li>
-    //     //                                         <li>
-    //     //                                             <input
-    //     //                                                 type='number'
-    //     //                                                 id='tokens_amount'
-    //     //                                                 name='tokens_amount'
-    //     //                                                 className='send-tokens-amount-input'
-    //     //                                                 placeholder= 'input coins amount '
-    //     //                                                 required
-    //     //                                                 // onChange={handleChange}
-    //     //                                             />
-    //     //                                         </li>
-                                                
-    //     //                                         <li> 
-    //     //                                             <button id="connect" className="send-btn" type='submit' >Delegate Tokens</button>
-    //     //                                         </li>
-    //     //                                     </ul>
-                                        
-    //     //                                 </form>
-    //     //                             </div>
-    //     //                         </div>
-    //     //                     </div>
-    //     //                 </div>
-    //     //             </div>
-    //     //         </li>
-    //     //     )
-    //     // }
-    // );
+                </div>
+            </li>
+        )
+    });
 
 
     return (
-
-        <>
-        <button variant="primary" onClick={handleShow}>
-            Launch demo modal
-        </button>
-
-        <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-            <Modal.Footer>
-            <button variant="secondary" onClick={handleClose}>
-                Close
-            </button>
-            <button variant="primary" onClick={handleClose}>
-                Save Changes
-            </button>
-            </Modal.Footer>
-        </Modal>
-        </>
-
-        // <div>
-        //     {items}
-        // </div>
+        <div>
+            {items}
+        </div>
     )
 }

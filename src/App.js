@@ -1,4 +1,15 @@
 import React, { Component, useState } from 'react';
+// import Navbar from './components/Navbar';
+// import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+// import { browserHistory, Router, Route } from 'react-router';
+
+import {
+  BrowserRouter as Router,
+  Link
+} from "react-router-dom";
+
+import { Routes ,Route } from 'react-router-dom';
+
 import logo from './logo.svg';
 import './App.css';
 import { Get_Balance_Form } from "./components/get_balance";
@@ -9,6 +20,7 @@ import {CosmWasmClient} from "@cosmjs/cosmwasm-stargate"
 import { Wallet } from './components/wallet';
 import Cookies from 'js-cookie'
 import { Stake_Coins } from './components/stake_coins';
+import { Navigation } from "./components/nav_bar"
 
 const RPC = ConstantineInfo.rpc;
 const ContractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
@@ -198,64 +210,18 @@ export default class App extends Component {
 
     // Connected
     return (
-      <div className="content">
-        <h2>
-            ""
-        </h2>
-        <div>
-        <nav id='menu' className='navbar navbar-default navbar-fixed-top'>
-              <div className='container'>
-                <div className='navbar-header'>
 
-                  <button
-                    type='button'
-                    className='navbar-toggle collapsed'
-                    data-toggle='collapse'
-                    data-target='#bs-example-navbar-collapse-1'
-                  >
-                    {' '}
-                    <span className='sr-only'>Toggle navigation</span>{' '}
-                    <span className='icon-bar'></span>{' '}
-                    <span className='icon-bar'></span>{' '}
-                    <span className='icon-bar'></span>{' '}
-                  </button>
+      <Router>
+        <Navigation />
+          <Routes>
 
-                  <a className='navbar-brand page-scroll' href='#page-top'>
-                  <img src={logo} alt="logo" />
-                  </a>{' '}
-
-
-                </div>
-    
-                <div
-                  className='collapse navbar-collapse'
-                  id='bs-example-navbar-collapse-1'
-                >
-                  <ul className='nav navbar-nav navbar-right'>
-                    <li>
-                      <a onClick={use_wallet_state} className='page-scroll'>
-                          Connected Wallet
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-        </nav>
-        <Wallet data={this.state} />
-        <p></p>
-        <Stake_Coins data={this.state} />
-        <p></p>
-        <Get_Balance_Form data={this.state} />
-
-        </div>
-        {/* Loading */}
-        {Loading(loadingMsg)}
-
-        {/* Logs map */}
-        <div className="logs">
-          <div>{logItems}</div>
-        </div>
-      </div>
+            <Route exact path="/" element={<Stake_Coins/>}/>
+            <Route exact path="/network_info" element={<Get_Balance_Form data={this.state}/>}/>
+            <Route exact path="/stake_tokens" element={<Stake_Coins data={this.state}/>}/>
+            <Route exact path="/wallet" element={<Wallet data={this.state}/>}/>
+             
+          </Routes>
+      </Router>
     );
   };
 }

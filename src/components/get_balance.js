@@ -2,10 +2,23 @@ import React from 'react'
 import { useState } from 'react'
 import Cookies from 'js-cookie'
 import { CosmWasm_Client } from '../core/cosmwasm_client';
+import { Modal_Search } from './modal_search';
 
 const initialState = {
   name: ''
 }
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
+
 
 export const Get_Balance_Form = (props) => {
 

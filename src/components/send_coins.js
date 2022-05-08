@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { Signed_CosmWasm_Client } from '../core/signed_cosmwasm_client'
+import Modal from 'react-modal';
 
 
 
@@ -9,13 +10,40 @@ const initialState = {
   tokens_amount: 0,
 }
 
+const modalCustomStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
+
 
 export const Send_Coins = (props) => {
 
   const [{ account_adress, tokens_amount }, setState] = useState(initialState)
   const [sending_tokens, setFormState] = useState(false)
   const [sending_tokens_info, setSendingTokensInfo] = useState({})
+  const [modalIsOpen, setIsOpen] = useState(false);
+  let subtitle;
 
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    subtitle.style.color = '#f00';
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+    setFormState(false)
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -28,12 +56,14 @@ export const Send_Coins = (props) => {
     try{   
       e.preventDefault()
 
+      let offlineSigner = await window.getOfflineSigner(props.data.chainMeta.chainId)
+
       setFormState(true)
       setSendingTokensInfo({info: "Sending tokens..."})
-
-      let offlineSigner = await window.getOfflineSigner(props.data.chainMeta.chainId)
+      openModal()
         
       const sent_tokens = await new Signed_CosmWasm_Client().send_tokens(props.data.userAddress, account_adress, tokens_amount, offlineSigner)
+
 
       if (sent_tokens.err){
 
@@ -79,24 +109,51 @@ export const Send_Coins = (props) => {
   if (sending_tokens){
 
     return (
-      <div id='send_tokens'>
-        <div className='container' >
-          <div className='section-title'>
-            <p> </p>
-            <p> </p>
-            <p> {sending_tokens_info.info} </p>
-            <p> <acc_name> {sending_tokens_info.transaction_hash} </acc_name> </p>
-            <p> <acc_name> {sending_tokens_info.transaction_height} </acc_name> </p>
-            <p> <acc_name> {sending_tokens_info.transaction_gas_used} </acc_name> </p>
-            <p> <acc_name> {sending_tokens_info.transaction_gas_wanted} </acc_name> </p>
-          </div>
-          <form name='sentMessage' validate onSubmit={handle_resend_tokens}>
-                  <button type='submit' className='btn btn-custom btn-lg'>
-                    send more tokens
-                  </button>
-          </form>
-        </div>
-      </div>)
+
+      <Modal
+      isOpen={modalIsOpen}
+      onAfterOpen={afterOpenModal}
+      onRequestClose={closeModal}
+      style={modalCustomStyles}
+      contentLabel="Example Modal"
+      >
+        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Send Tokens</h2>
+        <p> </p>
+        <p> </p>
+        <p> {sending_tokens_info.info} </p>
+        <p> <acc_name> {sending_tokens_info.transaction_hash} </acc_name> </p>
+        <p> <acc_name> {sending_tokens_info.transaction_height} </acc_name> </p>
+        <p> <acc_name> {sending_tokens_info.transaction_gas_used} </acc_name> </p>
+        <p> <acc_name> {sending_tokens_info.transaction_gas_wanted} </acc_name> </p>        
+        <button onClick={closeModal}>close</button>
+        {/* <form>
+          <input />
+          <button>tab navigation</button>
+          <button>stays</button>
+          <button>inside</button>
+          <button>the modal</button>
+        </form> */}
+      </Modal>
+
+      // <div id='send_tokens'>
+      //   <div className='container' >
+      //     <div className='section-title'>
+      //       <p> </p>
+      //       <p> </p>
+      //       <p> {sending_tokens_info.info} </p>
+      //       <p> <acc_name> {sending_tokens_info.transaction_hash} </acc_name> </p>
+      //       <p> <acc_name> {sending_tokens_info.transaction_height} </acc_name> </p>
+      //       <p> <acc_name> {sending_tokens_info.transaction_gas_used} </acc_name> </p>
+      //       <p> <acc_name> {sending_tokens_info.transaction_gas_wanted} </acc_name> </p>
+      //     </div>
+      //     <form name='sentMessage' validate onSubmit={handle_resend_tokens}>
+      //             <button type='submit' className='btn btn-custom btn-lg'>
+      //               send more tokens
+      //             </button>
+      //     </form>
+      //   </div>
+      // </div>
+      )
   }
 
 
@@ -135,7 +192,7 @@ export const Send_Coins = (props) => {
                     </li>
                     
                     <li> 
-                        <button id="connect" className="send-btn" type='submit' validate onSubmit={handle_send_coins} >Send Coins</button>
+                        <button id="connect" className="send-btn" type='submit' >Send Coins</button>
                     </li>
                 </ul>
             </form>
