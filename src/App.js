@@ -1,13 +1,7 @@
 import React, { Component, useState } from 'react';
-// import Navbar from './components/Navbar';
-// import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-// import { browserHistory, Router, Route } from 'react-router';
 
-import {
-  BrowserRouter as Router,
-  Link
-} from "react-router-dom";
 
+import { BrowserRouter as Router } from "react-router-dom";
 import { Routes ,Route } from 'react-router-dom';
 
 import logo from './logo.svg';
@@ -59,12 +53,6 @@ export default class App extends Component {
     // State
     const loadingMsg = this.state.loadingMsg;
     const userAddress = this.state.userAddress;
-
-
-    const use_wallet_state = () => {
-  
-      // setState({account: false, contracts: true})     
-    }
   
     const connectWallet = async () => {
       console.log('Connecting wallet...');
@@ -211,17 +199,27 @@ export default class App extends Component {
     // Connected
     return (
 
-      <Router>
-        <Navigation />
-          <Routes>
+      <div className="content">
+        <h2>
+              ""
+        </h2>
+        <div>
 
-            <Route exact path="/" element={<Stake_Coins/>}/>
-            <Route exact path="/network_info" element={<Get_Balance_Form data={this.state}/>}/>
-            <Route exact path="/stake_tokens" element={<Stake_Coins data={this.state}/>}/>
-            <Route exact path="/wallet" element={<Wallet data={this.state}/>}/>
-             
-          </Routes>
-      </Router>
+          <Router>
+            <Navigation />
+              <Routes>
+
+                <Route exact path="/" element={<Stake_Coins/>}/>
+                <Route exact path="/network_info" element={<Get_Balance_Form data={this.state}/>}/>
+                <Route exact path="/stake_tokens" element={<Stake_Coins data={this.state}/>}/>
+                <Route exact path="/wallet" element={<Wallet data={this.state}/>}/>
+                
+              </Routes>
+          </Router>
+
+        </div>
+
+      </div>
     );
   };
 }

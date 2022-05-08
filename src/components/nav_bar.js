@@ -1,20 +1,10 @@
 import React from 'react';
-import {Get_Balance_Form} from "./get_balance"
 import logo from '../logo.svg';
-import { Link } from 'react-router-dom';
-
 
 
 export const Navigation = () => {
 
-    const use_state = () => {
-
-
-    }
-
-
     return (
-        
         <div>
             <nav id='menu' className='navbar navbar-default navbar-fixed-top'>
                 <div className='container'>
