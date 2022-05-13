@@ -82,7 +82,7 @@ const headCells = [
   {
     id: 'name',
     numeric: false,
-    disablePadding: true,
+    disablePadding: false,
     label: 'Dessert (100g serving)',
   },
   {
@@ -121,7 +121,7 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
+        {/* <TableCell padding="checkbox">
           <Checkbox
             color="primary"
             indeterminate={numSelected > 0 && numSelected < rowCount}
@@ -131,7 +131,7 @@ function EnhancedTableHead(props) {
               'aria-label': 'select all desserts',
             }}
           />
-        </TableCell>
+        </TableCell> */}
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
@@ -325,20 +325,21 @@ export function EnhancedTable() {
                             key={row.name}
                             selected={isItemSelected}
                           >
-                            <TableCell padding="checkbox">
-                              <Checkbox
+                            {/* <TableCell padding="checkbox"> */}
+                              {/* <Checkbox
                                 color="primary"
                                 checked={isItemSelected}
                                 inputProps={{
                                   'aria-labelledby': labelId,
                                 }}
                               />
-                            </TableCell>
+                            </TableCell> */}
                             <TableCell
                               component="th"
                               id={labelId}
                               scope="row"
-                              padding="none"
+                              padding="10"
+                              align="left"
                             >
                               {row.name}
                             </TableCell>
