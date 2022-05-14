@@ -15,56 +15,51 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
-import Button from '@mui/material/Button';
-
 import Tooltip from '@mui/material/Tooltip';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import SendIcon from '@mui/icons-material/Send';
+import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
-import { All_validators } from './test_validators_data';
 
 
-function createData(name, voting_power, commission, tokens_staked, stake) {
+function createData(name, tokens_quantity, date, carbs, protein) {
   return {
     name,
-    voting_power,
-    commission,
-    tokens_staked,
-    stake,
+    tokens_quantity,
+    date,
+    // carbs,
+    // protein,
   };
 }
 
-function create_validator(name, voting_power, commission, tokens_staked, stake) {
+function add_transoction(recipient_adress, tokens_quantity, transaction_hash, date) {
 
-  return {
-    name,
-    voting_power,
-    commission,
-    tokens_staked,
-    stake,
-  };
+    return {
+      date,
+      recipient_adress,
+      transaction_hash,
+      tokens_quantity,
+      // carbs,
+      // protein,
+    };
 }
 
-const validators_data = All_validators.map(validator => { return create_validator(validator.description.moniker, validator.tokens, validator.rate, 0, "Stake")})
-
-
-// const rows = [
-//   createData('Cupcake', 305, 3.7, 67, 4.3),
-//   createData('Donut', 452, 25.0, 51, 4.9),
-//   createData('Eclair', 262, 16.0, 24, 6.0),
-//   createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-//   createData('Gingerbread', 356, 16.0, 49, 3.9),
-//   createData('Honeycomb', 408, 3.2, 87, 6.5),
-//   createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-//   createData('Jelly Bean', 375, 0.0, 94, 0.0),
-//   createData('KitKat', 518, 26.0, 65, 7.0),
-//   createData('Lollipop', 392, 0.2, 98, 0.0),
-//   createData('Marshmallow', 318, 0, 81, 2.0),
-//   createData('Nougat', 360, 19.0, 9, 37.0),
-//   createData('Oreo', 437, 18.0, 63, 4.0),
-// ];
+const rows = [
+  createData('Cupcake', 305, 3.7, 67, 4.3),
+  createData('Donut', 452, 25.0, 51, 4.9),
+  createData('Eclair', 262, 16.0, 24, 6.0),
+  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+  createData('Gingerbread', 356, 16.0, 49, 3.9),
+  createData('Honeycomb', 408, 3.2, 87, 6.5),
+  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+  createData('Jelly Bean', 375, 0.0, 94, 0.0),
+  createData('KitKat', 518, 26.0, 65, 7.0),
+  createData('Lollipop', 392, 0.2, 98, 0.0),
+  createData('Marshmallow', 318, 0, 81, 2.0),
+  createData('Nougat', 360, 19.0, 9, 37.0),
+  createData('Oreo', 437, 18.0, 63, 4.0),
+];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -85,7 +80,9 @@ function getComparator(order, orderBy) {
 // This method is created for cross-browser compatibility, if you don't
 // need to support IE11, you can use Array.prototype.sort() directly
 function stableSort(array, comparator) {
+
   const stabilizedThis = array.map((el, index) => [el, index]);
+
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
     if (order !== 0) {
@@ -93,6 +90,7 @@ function stableSort(array, comparator) {
     }
     return a[1] - b[1];
   });
+
   return stabilizedThis.map((el) => el[0]);
 }
 
@@ -101,32 +99,32 @@ const headCells = [
     id: 'name',
     numeric: false,
     disablePadding: false,
-    label: 'Name',
+    label: 'Recipient Adress',
   },
   {
-    id: 'voting_power',
+    id: 'tokens_quantity',
     numeric: true,
     disablePadding: false,
-    label: 'Voting Power',
+    label: 'Tokens Quantity',
   },
   {
-    id: 'commission',
+    id: 'date',
     numeric: true,
     disablePadding: false,
-    label: 'Commission',
+    label: 'Date',
   },
-  {
-    id: 'tokens_staked',
-    numeric: true,
-    disablePadding: false,
-    label: 'Tokens Staked',
-  },
-  {
-    id: 'stake',
-    numeric: true,
-    disablePadding: false,
-    label: 'Stake',
-  },
+//   {
+//     id: 'carbs',
+//     numeric: true,
+//     disablePadding: false,
+//     label: 'Carbs (g)',
+//   },
+//   {
+//     id: 'protein',
+//     numeric: true,
+//     disablePadding: false,
+//     label: 'Protein (g)',
+//   },
 ];
 
 function EnhancedTableHead(props) {
@@ -188,12 +186,6 @@ EnhancedTableHead.propTypes = {
 const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
 
-  const handleToolbarSend = (event) => {
-
-
-    console.log("====> Toolbar SEND ", event)
-  };
-
   return (
     <Toolbar
       sx={{
@@ -221,20 +213,20 @@ const EnhancedTableToolbar = (props) => {
           id="tableTitle"
           component="div"
         >
-          All Validators
+          Transactions
         </Typography>
       )}
 
       {numSelected > 0 ? (
-        <Tooltip title="Send">
-          <IconButton onClick={(event) => handleToolbarSend(event)}>
-            <SendIcon />
+        <Tooltip title="Delete">
+          <IconButton>
+            <DeleteIcon />
           </IconButton>
         </Tooltip>
       ) : (
         <Tooltip title="Filter list">
           <IconButton>
-            {/* <FilterListIcon /> */}
+            <FilterListIcon />
           </IconButton>
         </Tooltip>
       )}
@@ -246,10 +238,10 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export function Validators_Table() {
+export function Wallet_Table() {
 
   const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('voting_power');
+  const [orderBy, setOrderBy] = React.useState('tokens_quantity');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
@@ -261,48 +253,33 @@ export function Validators_Table() {
     setOrderBy(property);
   };
 
-  // const handleSelectAllClick = (event) => {
-  //   if (event.target.checked) {
-  //     const newSelecteds = validators_data.map((n) => n.name);
-  //     setSelected(newSelecteds);
-  //     return;
-  //   }
-  //   setSelected([]);
-  // };
-
-  const handleClick = (event, name) => {
-
-    const selectedIndex = selected.indexOf(name);
-
-    let newSelected = [];
-
-    if (name !== selected[0])
-      newSelected = [name];
-    else 
-      newSelected = []
-
-    // let newSelected = [];
-
-    // if (selectedIndex === -1) {
-    //   newSelected = newSelected.concat(selected, name);
-    // } else if (selectedIndex === 0) {
-    //   newSelected = newSelected.concat(selected.slice(1));
-    // } else if (selectedIndex === selected.length - 1) {
-    //   newSelected = newSelected.concat(selected.slice(0, -1));
-    // } else if (selectedIndex > 0) {
-    //   newSelected = newSelected.concat(
-    //     selected.slice(0, selectedIndex),
-    //     selected.slice(selectedIndex + 1),
-    //   );
-    // }
-
-    setSelected(newSelected);
+  const handleSelectAllClick = (event) => {
+    if (event.target.checked) {
+      const newSelecteds = rows.map((n) => n.name);
+      setSelected(newSelecteds);
+      return;
+    }
+    setSelected([]);
   };
 
-  const handleSend = (event, row_data) => {
+  const handleClick = (event, name) => {
+    const selectedIndex = selected.indexOf(name);
+    let newSelected = [];
 
-    console.log("===> Handle SEND")
-    console.log(row_data)
+    if (selectedIndex === -1) {
+      newSelected = newSelected.concat(selected, name);
+    } else if (selectedIndex === 0) {
+      newSelected = newSelected.concat(selected.slice(1));
+    } else if (selectedIndex === selected.length - 1) {
+      newSelected = newSelected.concat(selected.slice(0, -1));
+    } else if (selectedIndex > 0) {
+      newSelected = newSelected.concat(
+        selected.slice(0, selectedIndex),
+        selected.slice(selectedIndex + 1),
+      );
+    }
+
+    setSelected(newSelected);
   };
 
   const handleChangePage = (event, newPage) => {
@@ -320,9 +297,9 @@ export function Validators_Table() {
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
-  // Avoid a layout jump when reaching the last page with empty validators_data.
+  // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - validators_data.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
 
@@ -342,14 +319,14 @@ export function Validators_Table() {
                     numSelected={selected.length}
                     order={order}
                     orderBy={orderBy}
-                    // onSelectAllClick={handleSelectAllClick}
+                    onSelectAllClick={handleSelectAllClick}
                     onRequestSort={handleRequestSort}
-                    rowCount={validators_data.length}
+                    rowCount={rows.length}
                   />
                   <TableBody>
                     {/* if you don't need to support IE11, you can replace the `stableSort` call with:
-                      validators_data.slice().sort(getComparator(order, orderBy)) */}
-                    {stableSort(validators_data, getComparator(order, orderBy))
+                      rows.slice().sort(getComparator(order, orderBy)) */}
+                    {stableSort(rows, getComparator(order, orderBy))
                       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                       .map((row, index) => {
                         const isItemSelected = isSelected(row.name);
@@ -383,10 +360,10 @@ export function Validators_Table() {
                             >
                               {row.name}
                             </TableCell>
-                            <TableCell align="right">{row.voting_power}</TableCell>
-                            <TableCell align="right">{row.commission}</TableCell>
-                            <TableCell align="right">{row.tokens_staked}</TableCell>
-                            <TableCell align="right"> <IconButton onClick={(event) => handleSend(event, row)}> Stake </IconButton> </TableCell>
+                            <TableCell align="right">{row.tokens_quantity}</TableCell>
+                            <TableCell align="right">{row.date}</TableCell>
+                            <TableCell align="right">{row.carbs}</TableCell>
+                            <TableCell align="right">{row.protein}</TableCell>
                           </TableRow>
                         );
                       })}
@@ -405,7 +382,7 @@ export function Validators_Table() {
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 component="div"
-                count={validators_data.length}
+                count={rows.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Send_Coins } from "./send_coins";
 import { Transactions_history } from "./transactions_history";
-import { EnhancedTable } from "./table/table";
+import { Wallet_Table } from './table/transactions_history_table';
 
 
 
@@ -21,8 +21,7 @@ export const Wallet = (props) => {
               <Send_Coins data={props.data} />
               <p> </p>
               <p> </p>
-              <EnhancedTable/>
-
+              <Wallet_Table/>
 
             </div>
           </div>

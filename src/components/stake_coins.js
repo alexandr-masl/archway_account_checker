@@ -1,6 +1,6 @@
 import React from 'react'
 import { Stake_Validator } from "./stake_validator_module";
-import { EnhancedTable } from "./table/table";
+import { Validators_Table } from "./table/table";
 
 
 
@@ -11,15 +11,27 @@ export const Stake_Coins = (props) => {
       <div id='contact'>
         <div className='container'>
           <div className='col-md-8'>
-            <div className='row'>
-              {/* <div className='section-title'>
-               <h2> Stake Tokens</h2>
-              </div> */}
-              {/* <Stake_Validator data={props.data} /> */}
-              <EnhancedTable />
 
-              {/* <p></p> */}
+            <div className='card'>
+
+
+                <div className='left_content'>
+                    
+                    "fisrt block"
+                </div>
+                <div className='block'>
+                    
+                    "second block"
+                </div>
+                <p></p>
+                <div className='row'>
+
+                  <Validators_Table />
+
+                </div>
+
             </div>
+
           </div>
         </div>
       </div>
