@@ -20,6 +20,18 @@ import Switch from '@mui/material/Switch';
 import SendIcon from '@mui/icons-material/Send';
 import { visuallyHidden } from '@mui/utils';
 import { All_validators } from './test_validators_data';
+import { orange } from '@mui/material/colors';
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+
+const ColorButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.getContrastText(orange[500]),
+  borderRadius: "15px",
+  backgroundColor: orange[500],
+  '&:hover': {
+    backgroundColor: orange[700],
+  },
+}));
 
 
 function create_validator(name, voting_power, commission, tokens_staked, stake) {
@@ -104,7 +116,8 @@ function EnhancedTableHead(props) {
     props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
-  };
+};
+
 
   return (
     <TableHead>
@@ -359,7 +372,18 @@ export function Validators_Table() {
                             <TableCell align="right">{row.voting_power}</TableCell>
                             <TableCell align="right">{row.commission}</TableCell>
                             <TableCell align="right">{row.tokens_staked}</TableCell>
-                            <TableCell align="right"> <IconButton onClick={(event) => handleSend(event, row)}> Stake </IconButton> </TableCell>
+                            <TableCell align="right"> 
+                              <ColorButton 
+                                    variant="contained" 
+                                    // onClick={handleOpen}                    
+                                    style={{maxWidth: '170px', maxHeight: '130px', minWidth: '70px', minHeight: '35px'}}
+                                >
+                                    <Typography variant="h5" component="div" color="#f5f5f5">
+                                        Stake
+                                    </Typography>
+
+                                </ColorButton>
+                            </TableCell>
                           </TableRow>
                         );
                       })}

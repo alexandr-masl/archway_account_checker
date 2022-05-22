@@ -9,6 +9,9 @@ import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 import { orange } from '@mui/material/colors';
 import { Staked_validators } from './test_validators_data';
+import { Signed_CosmWasm_Client } from '../../core/signed_cosmwasm_client'
+import { ConstantineInfo } from '../../chain.info.constantine';
+
 
 
 const style = {
@@ -32,10 +35,17 @@ export const Stake_Tokens_Modal_Dashboard = () => {
     const [validator_name_input_value, setValidatorInputValue] = React.useState('');
     const [delegated_amount_input_value, setTokensInputValue] = React.useState(0);
 
-    const set_validator_to_delegate = (data) => {
+    const delegate_tokens = async() => {
 
-        console.log("---> set_validator_to_delegate, DATA")
-        console.log(data)
+        console.log("---> delegate_tokens, DATA")
+
+        let offlineSigner = await window.getOfflineSigner(ConstantineInfo.chainId)
+
+        const sent_tokens = await new Signed_CosmWasm_Client().send_tokens("archway1ms4pgv3umf52rjy6zu5rqgyfsaemr6e9yg5y4w", "archwayvaloper1t3zrk2vva33ajcut0rvjrtxchlynx7j5mmgj8m", 123, offlineSigner)
+
+        console.log("======= SENT TOKENS ================")
+        console.log(sent_tokens)
+
     }
 
     console.log("--- Delegating DATA, name", validator_name_input_value, "amount", delegated_amount_input_value)
@@ -43,6 +53,7 @@ export const Stake_Tokens_Modal_Dashboard = () => {
 
     const ColorButton = styled(Button)(({ theme }) => ({
         color: theme.palette.getContrastText(orange[500]),
+        borderRadius: "15px",
         backgroundColor: orange[500],
         '&:hover': {
           backgroundColor: orange[700],
@@ -56,6 +67,7 @@ export const Stake_Tokens_Modal_Dashboard = () => {
                 <ColorButton 
                     variant="contained" 
                     style={{maxWidth: '170px', maxHeight: '130px', minWidth: '160px', minHeight: '45px'}}
+                    onClick={(data) => delegate_tokens(data)}
                 >
                     Stake
 
@@ -75,7 +87,16 @@ export const Stake_Tokens_Modal_Dashboard = () => {
 
     return (
         <div>
-            <Button onClick={handleOpen}>Stake</Button>
+            <ColorButton 
+                variant="contained" 
+                onClick={handleOpen}                    
+                style={{maxWidth: '170px', maxHeight: '130px', minWidth: '90px', minHeight: '50px'}}
+            >
+                <Typography variant="h4" component="div" color="#f5f5f5">
+                    Stake
+                </Typography>
+
+            </ColorButton>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -93,7 +114,7 @@ export const Stake_Tokens_Modal_Dashboard = () => {
                                 onChange={(event, newInputValue) => {
                                     setValidatorInputValue((newInputValue ? newInputValue.label : ""));
                                 }}
-                                renderInput={(params) => <TextField {...params} label="Validators" />}
+                                renderInput={(params) => <TextField {...params} label="Validator Name" />}
                             />
                         </Grid>
                         <Grid item xs={5}>

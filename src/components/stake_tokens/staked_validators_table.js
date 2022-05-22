@@ -20,6 +20,10 @@ import Switch from '@mui/material/Switch';
 import SendIcon from '@mui/icons-material/Send';
 import { visuallyHidden } from '@mui/utils';
 import { Staked_validators } from './test_validators_data';
+import { orange } from '@mui/material/colors';
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+
 
 
 function create_validator(name, voting_power, commission, tokens_staked, stake) {
@@ -298,6 +302,16 @@ export function Staked_Validators_Table() {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - validators_data.length) : 0;
 
+
+  const ColorButton = styled(Button)(({ theme }) => ({
+      color: theme.palette.getContrastText(orange[500]),
+      borderRadius: "15px",
+      backgroundColor: orange[500],
+      '&:hover': {
+        backgroundColor: orange[700],
+      },
+  }));
+
   return (
 
     <div className='container'>
@@ -360,7 +374,22 @@ export function Staked_Validators_Table() {
                             <TableCell align="right">{row.voting_power}</TableCell>
                             <TableCell align="right">{row.commission}</TableCell>
                             <TableCell align="right">{row.tokens_staked}</TableCell>
-                            <TableCell align="right"> <IconButton onClick={(event) => handleSend(event, row)}> Stake </IconButton> </TableCell>
+                            <TableCell align="right"> 
+
+                              {/* <IconButton onClick={(event) => handleSend(event, row)}> Stake </IconButton>  */}
+
+                              <ColorButton 
+                                  variant="contained" 
+                                  // onClick={handleOpen}                    
+                                  style={{maxWidth: '170px', maxHeight: '130px', minWidth: '70px', minHeight: '35px'}}
+                              >
+                                  <Typography variant="h5" component="div" color="#f5f5f5">
+                                      Unstake
+                                  </Typography>
+
+                              </ColorButton>
+
+                            </TableCell>
                           </TableRow>
                         );
                       })}

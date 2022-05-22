@@ -100,7 +100,7 @@ export default function DashBoard() {
                         <Grid item xs={6}>
                             <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                                 <Box sx={{ width: '100%' }}>
-                                    <Main_Item>
+                                    {/* <Main_Item> */}
                                         <Item>
                                             <Stack spacing={2}>
                                                 <Grid container spacing={2}>
@@ -115,11 +115,11 @@ export default function DashBoard() {
                                                         </Internal_Item>
                                                     </Grid>
                                                     <Grid item xs={3}>
-                                                        <Button_Item>
+                                                        {/* <Button_Item> */}
 
                                                             <Stake_Tokens_Modal_Dashboard />
 
-                                                        </Button_Item>
+                                                        {/* </Button_Item> */}
                                                     </Grid>
                                                 </Grid>
                                             </Stack>
@@ -168,7 +168,7 @@ export default function DashBoard() {
                                                 </Grid>
                                             </Stack>
                                         </Item>
-                                    </Main_Item>
+                                    {/* </Main_Item> */}
                                 </Box>
                             </Box>
                         </Grid>

@@ -13,22 +13,12 @@ export class Signed_CosmWasm_Client{
 
         try{   
 
-            // let offlineSigner = await off_line_signer(ConstantineInfo.chainId)
             let gasPrice = GasPrice.fromString('0.002uconst');
             let cwClient = await SigningCosmWasmClient.connectWithSigner(RPC, off_line_signer, {gasPrice: gasPrice});
             
             const coin = [{amount: tokens_amount, denom: "uconst"}]
-
-            console.log("==========>>> SENDING TOKENS FROM ", sender_adress, "TO", receiver_adress)
         
             const sent_tokens = await cwClient.sendTokens(sender_adress, receiver_adress, coin, "auto")
-        
-            console.log(sent_tokens)
-            
-        
-        
-            console.log('HASH')
-            console.log(sent_tokens.transactionHash)
 
             return {
                 data: sent_tokens.rawLog,
