@@ -1,9 +1,6 @@
 import React, { Component, useState } from 'react';
-
-
 import { BrowserRouter as Router } from "react-router-dom";
 import { Routes ,Route } from 'react-router-dom';
-
 import logo from './logo.svg';
 import './App.css';
 import { Get_Balance_Form } from "./components/get_balance";
@@ -13,8 +10,8 @@ import { ConstantineInfo } from './chain.info.constantine';
 import {CosmWasmClient} from "@cosmjs/cosmwasm-stargate"
 import { Wallet } from './components/wallet';
 import Cookies from 'js-cookie'
-import { Stake_Coins } from './components/stake_coins';
-import { Navigation } from "./components/nav_bar"
+import { Stake_Coins } from './components/stake_tokens/stake_coins';
+import { Navigation, Not_Connected_Navigation } from "./components/nav_bar"
 
 const RPC = ConstantineInfo.rpc;
 const ContractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
@@ -47,12 +44,14 @@ export default class App extends Component {
       userAddress: cookies_user_adress ? cookies_user_adress : null,
       balance: 0
     };
+
   };
 
   render() {
     // State
     const loadingMsg = this.state.loadingMsg;
     const userAddress = this.state.userAddress;
+
   
     const connectWallet = async () => {
       console.log('Connecting wallet...');
@@ -106,6 +105,7 @@ export default class App extends Component {
                 console.warn('Error access experimental features, please update Keplr');
               }
             } else {
+              return {err: "Keplr is not defined.."}
               console.warn('Error accessing Keplr');
             }
           } else {
@@ -115,6 +115,8 @@ export default class App extends Component {
           console.error('Error connecting to wallet', e);
         }
     }
+
+    // connectWallet()
 
     // Maps
     let logMeta = [];
@@ -140,61 +142,46 @@ export default class App extends Component {
     // Not Connected
     if (!userAddress) {
       return (
-        <div className="content">
-            <h2>
-                  ""
-            </h2>
-          <div>
-            <nav id='menu' className='navbar navbar-default navbar-fixed-top'>
-              <div className='container'>
-                <div className='navbar-header'>
-                  <button
-                    type='button'
-                    className='navbar-toggle collapsed'
-                    data-toggle='collapse'
-                    data-target='#bs-example-navbar-collapse-1'
-                  >
-                    {' '}
-                    <span className='sr-only'>Toggle navigation</span>{' '}
-                    <span className='icon-bar'></span>{' '}
-                    <span className='icon-bar'></span>{' '}
-                    <span className='icon-bar'></span>{' '}
-                  </button>
-                  <a className='navbar-brand page-scroll' href='#page-top'>
-                  <img src={logo} alt="logo" />
-                  </a>{' '}
-                </div>
-    
-                <div
-                  className='collapse navbar-collapse'
-                  id='bs-example-navbar-collapse-1'
-                >
-                  <ul className='nav navbar-nav navbar-right'>
-                      {/* <li>
-                          <a onClick={connectWallet} className='page-scroll'>
-                          Accounts
-                          </a>
-                      </li>
-                      <li>
-                          <a onClick={connectWallet} className='page-scroll'>
-                          Contracts
-                          </a>
-                      </li> */}
-                      <li> 
-                          <button id="connect" className="btn-custom" onClick={connectWallet}>Connect Wallet</button>
-                      </li>
-                  </ul>
-                </div>
-              </div>
-            </nav>
-            <Get_Balance_Form />
-            <p></p>
-            <Stake_Coins data={this.state} />
-          </div>
 
-        </div>
+        <div>
+            <nav id='menu' className='navbar navbar-default navbar-fixed-top'>
+                <div className='container'>
+
+                    <a className='navbar-brand page-scroll' href='/'>
+                    <img src={logo} alt="logo" />
+                    </a>
+
+                    <div
+                        className='collapse navbar-collapse'
+                        id='bs-example-navbar-collapse-1'
+                    >
+                        <ul className='nav navbar-nav navbar-right'>
+
+                            <li>
+                                <a href='/network_info'>
+                                    Network Info
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/stake_tokens" >
+                                    Stake Tokens
+                                </a>
+                            </li>
+
+                            <li> 
+                                <button id="connect" className="btn-custom" onClick={connectWallet}>Connect Wallet</button>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div> 
       );
     }
+
+
 
     // Connected
     return (
@@ -204,7 +191,6 @@ export default class App extends Component {
               ""
         </h2>
         <div>
-
           <Router>
             <Navigation />
               <Routes>
@@ -216,22 +202,8 @@ export default class App extends Component {
                 
               </Routes>
           </Router>
-
         </div>
-
       </div>
     );
   };
-}
-
-// Conditional rendering
-function Loading(msg) {
-  if (!msg) {
-    return;
-  }
-  return (
-    <div className="loading">
-      <p>{msg}</p>
-    </div>
-  );
 }

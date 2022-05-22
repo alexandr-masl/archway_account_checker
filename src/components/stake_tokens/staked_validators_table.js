@@ -13,28 +13,14 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
-import Button from '@mui/material/Button';
-
 import Tooltip from '@mui/material/Tooltip';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import SendIcon from '@mui/icons-material/Send';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
-import { All_validators } from './test_validators_data';
+import { Staked_validators } from './test_validators_data';
 
-
-function createData(name, voting_power, commission, tokens_staked, stake) {
-  return {
-    name,
-    voting_power,
-    commission,
-    tokens_staked,
-    stake,
-  };
-}
 
 function create_validator(name, voting_power, commission, tokens_staked, stake) {
 
@@ -47,24 +33,8 @@ function create_validator(name, voting_power, commission, tokens_staked, stake) 
   };
 }
 
-const validators_data = All_validators.map(validator => { return create_validator(validator.description.moniker, validator.tokens, validator.rate, 0, "Stake")})
+const validators_data = Staked_validators.map(validator => { return create_validator(validator.description.moniker, validator.tokens, validator.rate, 0, "Stake")})
 
-
-// const rows = [
-//   createData('Cupcake', 305, 3.7, 67, 4.3),
-//   createData('Donut', 452, 25.0, 51, 4.9),
-//   createData('Eclair', 262, 16.0, 24, 6.0),
-//   createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-//   createData('Gingerbread', 356, 16.0, 49, 3.9),
-//   createData('Honeycomb', 408, 3.2, 87, 6.5),
-//   createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-//   createData('Jelly Bean', 375, 0.0, 94, 0.0),
-//   createData('KitKat', 518, 26.0, 65, 7.0),
-//   createData('Lollipop', 392, 0.2, 98, 0.0),
-//   createData('Marshmallow', 318, 0, 81, 2.0),
-//   createData('Nougat', 360, 19.0, 9, 37.0),
-//   createData('Oreo', 437, 18.0, 63, 4.0),
-// ];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -183,6 +153,8 @@ EnhancedTableHead.propTypes = {
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
+  borderRadius: "15px",
+
 };
 
 const EnhancedTableToolbar = (props) => {
@@ -202,6 +174,7 @@ const EnhancedTableToolbar = (props) => {
         ...(numSelected > 0 && {
           bgcolor: (theme) =>
             alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
+            
         }),
       }}
     >
@@ -221,7 +194,7 @@ const EnhancedTableToolbar = (props) => {
           id="tableTitle"
           component="div"
         >
-          All Validators
+          Staked Validators
         </Typography>
       )}
 
@@ -237,7 +210,8 @@ const EnhancedTableToolbar = (props) => {
             {/* <FilterListIcon /> */}
           </IconButton>
         </Tooltip>
-      )}
+      )
+      }
     </Toolbar>
   );
 };
@@ -246,7 +220,7 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export function Validators_Table() {
+export function Staked_Validators_Table() {
 
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('voting_power');
@@ -329,9 +303,9 @@ export function Validators_Table() {
     <div className='container'>
         <div className='row'>
 
-          <Box sx={{ width: '100%' }}>
-            <Paper sx={{ width: '100%', mb: 2 }}>
-              <EnhancedTableToolbar numSelected={selected.length} />
+          <Box sx={{ width: '100%',  }}>
+            <Paper sx={{ width: '100%', mb: 2 , borderRadius: "15px",}}>
+              {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
               <TableContainer>
                 <Table
                   sx={{ minWidth: 750 }}

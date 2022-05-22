@@ -1,17 +1,9 @@
 import React from 'react'
 import { useState } from 'react'
-import { Signed_CosmWasm_Client } from '../core/signed_cosmwasm_client'
+import { Signed_CosmWasm_Client } from '../../core/signed_cosmwasm_client'
 import Frame from 'react-frame-component';
 import Modal from 'react-modal';
 import { useTable } from 'react-table'
-
-
-const initialState = {
-    account_adress: '',
-    tokens_amount: 0,
-}
-
-
 
 
 export const Stake_Validator = (props) => {
