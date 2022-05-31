@@ -21,8 +21,13 @@ h2 {
   color: #333;
 }
 h3 {
-  font-size: 20px;
+  /* font-size: 15px;
   font-weight: 600;
+  color: #333; */
+  text-transform: uppercase;
+  margin: 0 0 20px;
+  font-weight: 500;
+  font-size: 36px;
   color: #333;
 }
 h4 {
@@ -45,6 +50,16 @@ p.intro {
 a {
   color: #608dfd;
   font-weight: 400;
+}
+b {
+  color: hsl(19, 96%, 31%);
+  font-weight: 700;
+  font-size: 17px;
+}
+acc_name {
+  color: hsl(19, 90%, 4%);
+  font-weight: 700;
+  font-size: 17px;
 }
 a:hover,
 a:focus {
@@ -70,6 +85,7 @@ hr {
   margin-bottom: 20px;
   border: 0;
 }
+
 /* Navigation */
 #menu {
   padding: 15px;
@@ -87,6 +103,13 @@ hr {
   color: #333;
   text-transform: uppercase;
 }
+#menu b.navbar-brand {
+  font-family: "Raleway", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+  text-transform: uppercase;
+}
 #menu.navbar-default .navbar-nav > li > a {
   font-family: "Lato", sans-serif;
   text-transform: uppercase;
@@ -97,6 +120,7 @@ hr {
   border-radius: 0;
   margin: 9px 20px 0;
 }
+
 #menu.navbar-default .navbar-nav > li > a:after {
   display: block;
   position: absolute;
@@ -116,6 +140,7 @@ hr {
 .navbar-default .navbar-nav > .active > a:focus {
   background-color: transparent;
 }
+
 .navbar-default .navbar-nav > .active > a:after,
 .navbar-default .navbar-nav > .active > a:hover:after,
 .navbar-default .navbar-nav > .active > a:focus:after {
@@ -162,6 +187,9 @@ hr {
 .section-title p {
   font-size: 18px;
 }
+
+/*  CONNECT WALLET BUTTON  */
+
 .btn-custom {
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
@@ -266,9 +294,231 @@ header .intro-text {
   opacity: 1;
 }
 
+/* Send tokens Section */
+
+#send_tokens {
+  
+  display: inline-block;
+  padding: 10px 0 25px;
+  border-radius: 25px;
+  background-color: rgba(248, 247, 246, 0.35);
+  position: relative;
+
+  /* margin-right: 100px; */
+  left: 0px;
+
+  /* background: linear-gradient(to right, #f6f3f1 0%, #f5e1cd 100%); */
+  /* color: rgba(255, 255, 255, 0.937); */
+}
+
+/* #send_tokens .positioned {
+  position: relative;
+  top: 30px;
+  left: 30px;
+
+} */
+
+
+#send_tokens .section-title {
+  margin-bottom: 15px;
+  position: relative;
+}
+#send_tokens .section-title p {
+  font-size: 21px;
+  text-align: left;
+  position: relative;
+  left: 25px;
+
+}
+#send_tokens h2 {
+  color: #fff;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+}
+
+#send_tokens .section-title h2::after {
+  position: absolute;
+  content: "";
+  background: rgba(255, 255, 255, 0.3);
+  height: 4px;
+  width: 60px;
+  bottom: 0;
+  left: 70px;
+}
+
+#send_tokens form {
+  padding-top: 20px;
+}
+#send_tokens .text-danger {
+  color: #111010;
+  text-align: left;
+}
+
+#send_tokens .send-btn {
+  display: inline-block;
+  /* margin-right: 0px; */
+  position: relative;
+
+  left: 100px;
+
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  color: rgb(248, 244, 244);
+  background-color: #181819;
+  background-image: linear-gradient(to right, #f66e49 0%, #f29b65 100%);
+
+  padding: 9px 34px;
+  letter-spacing: 1px;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 25px;
+  transition: all 0.5s linear;
+  border: 0;
+}
+
+#send_tokens .check-btn {
+  display: inline-block;
+  margin-right: 0px;
+  position: relative;
+
+  left: 100px;
+
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  color: rgb(248, 244, 244);
+  background-color: #181819;
+  background-image: linear-gradient(to right, #f66e49 0%, #f29b65 100%);
+
+  padding: 9px 140px;
+  letter-spacing: 1px;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 25px;
+  transition: all 0.5s linear;
+  border: 0;
+}
+
+
+#send_tokens .btn-custom:hover {
+  color: #1f386e;
+  background: #f66e49;
+}
+
+/* Send tokens input */
+
+#send_tokens .send-tokens-form {
+
+  display: inline-block;
+  position: relative;
+
+  width: 100%;
+  padding: 6px 172px;
+  font-size: 19px;
+  line-height: 1.42857143;
+  color: #444;
+
+  margin-left: 20px;
+
+
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+
+
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+#send_tokens .send-tokens-amount-input {
+
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  padding: 6px 25px;
+  font-size: 19px;
+  line-height: 1.42857143;
+  color: #444;
+
+  margin-left: 20px;
+
+
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+
+
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+#send_tokens .send-tokens-form-control {
+  display: inline-block;
+  text-align: left;
+  position: absolute;
+  left: 25px;
+  display: block;
+  width: 100%;
+  padding: 6px 12px;
+  font-size: 16px;
+  line-height: 1.42857143;
+  color: #444;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+#send_tokens .send-tokens-form-control:focus {
+  border-color: #999;
+  outline: 0;
+  -webkit-box-shadow: transparent;
+  box-shadow: transparent;
+}
+.send-tokens-form-control::-webkit-input-placeholder {
+  color: #777;
+}
+.send-tokens-form-control:-moz-placeholder {
+  color: #777;
+}
+.send-tokens-form-control::-moz-placeholder {
+  color: #777;
+}
+.send-tokens-form-control:-ms-input-placeholder {
+  color: #777;
+}
+
+/* Transactions History */
+
+#transactions_history {
+  
+  display: inline-block;
+  padding: 10px 0 25px;
+  border-radius: 25px;
+  background-color: rgba(248, 247, 246, 0.35);
+  /* background: linear-gradient(to right, #f6f3f1 0%, #f5e1cd 100%); */
+  /* color: rgba(255, 255, 255, 0.937); */
+}
+
 /* Contact Section */
+
 #contact {
   padding: 70px 0 60px;
+  border-radius: 25px;
   background: linear-gradient(to right, #ff7142 0%, #fb9e5c 100%);
   color: rgba(255, 255, 255, 0.937);
 }
@@ -295,10 +545,22 @@ header .intro-text {
 }
 #contact h3 {
   color: #fff;
-  margin-top: 80px;
-  margin-bottom: 25px;
-  padding-bottom: 20px;
-  font-weight: 400;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  /* font-weight: 400; */
+}
+
+#contact validator_name {
+  color: rgb(82, 46, 227);
+  margin-top: 10px;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  /* color: rgb(18, 36, 239); */
+  /* margin-top: 80px; */
+  /* margin-bottom: 25px; */
+  /* padding-bottom: 20px; */
+  /* font-weight: 400; */
 }
 #contact form {
   padding-top: 20px;
@@ -322,6 +584,9 @@ label {
   font-family: "Open Sans", sans-serif;
   float: left;
 }
+
+/* FORM INPUT  */
+
 #contact .form-control {
   display: block;
   width: 100%;
@@ -332,7 +597,7 @@ label {
   background-color: #fff;
   background-image: none;
   border: 1px solid #ddd;
-  border-radius: 0;
+  border-radius: 25px;
   -webkit-box-shadow: none;
   box-shadow: none;
   -webkit-transition: none;
@@ -357,6 +622,8 @@ label {
 .form-control:-ms-input-placeholder {
   color: #777;
 }
+
+
 #contact .contact-item {
   margin: 20px 0;
 }
