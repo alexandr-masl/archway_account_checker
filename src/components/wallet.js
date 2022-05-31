@@ -152,13 +152,13 @@ export const Wallet = (props) => {
                   <Grid item xs={5}>
                     <Tokens_Item>
                       <Final_Item>
-                        <acc_name> Account </acc_name> {props.data.userAddress}                                  
+                        <acc_name> Account </acc_name> {"props.data.userAddress"}                                  
                       </Final_Item>
                     </Tokens_Item>
                     <p></p>
                     <Tokens_Item>
                         <Final_Item>
-                          <acc_name> Balance </acc_name> {props.data.balance} UCONST
+                          <acc_name> Balance </acc_name> {"props.data.balance"} UCONST
                         </Final_Item>
                     </Tokens_Item>
                   </Grid>

@@ -25,8 +25,6 @@ export const Get_Balance_Form = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    Cookies.remove('userAddress')
-
     const _is_submited_switching = form_is_submited ? false : true
  
     const account_info = await new CosmWasm_Client().get_account_info(name)

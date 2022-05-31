@@ -45,7 +45,7 @@ function create_validator(name, voting_power, commission, tokens_staked, stake) 
   };
 }
 
-const validators_data = All_validators.map(validator => { return create_validator(validator.description.moniker, validator.tokens, validator.rate, 0, "Stake")})
+const validators_data = All_validators.map(validator => { return create_validator(validator.description.moniker, validator.tokens, validator.rate, 0, "")})
 
 
 function descendingComparator(a, b, orderBy) {
@@ -83,7 +83,7 @@ const headCells = [
     id: 'name',
     numeric: false,
     disablePadding: false,
-    label: 'Name',
+    label: '',
   },
   {
     id: 'voting_power',
@@ -107,7 +107,7 @@ const headCells = [
     id: 'stake',
     numeric: true,
     disablePadding: false,
-    label: 'Stake',
+    label: '',
   },
 ];
 
@@ -145,7 +145,10 @@ function EnhancedTableHead(props) {
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
             >
-              {headCell.label}
+              <Typography variant="h6" component="h6">
+                {headCell.label}
+              </Typography>
+              
               {orderBy === headCell.id ? (
                 <Box component="span" sx={visuallyHidden}>
                   {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
@@ -367,11 +370,25 @@ export function Validators_Table() {
                               padding="10"
                               align="left"
                             >
-                              {row.name}
+                              <Typography variant="h5" component="h5">
+                                {row.name}
+                              </Typography>
                             </TableCell>
-                            <TableCell align="right">{row.voting_power}</TableCell>
-                            <TableCell align="right">{row.commission}</TableCell>
-                            <TableCell align="right">{row.tokens_staked}</TableCell>
+                            <TableCell align="right">
+                              <Typography variant="h6" component="h6">
+                                {row.voting_power}
+                              </Typography>
+                            </TableCell>
+                            <TableCell align="right">
+                              <Typography variant="h6" component="h6">
+                                {row.commission}
+                              </Typography>
+                            </TableCell>
+                            <TableCell align="right">
+                              <Typography variant="h6" component="h6">
+                                {row.tokens_staked}
+                              </Typography>
+                            </TableCell>
                             <TableCell align="right"> 
                               <ColorButton 
                                     variant="contained" 

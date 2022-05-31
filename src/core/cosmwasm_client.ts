@@ -20,9 +20,6 @@ export class CosmWasm_Client {
             console.log("----- BALANCE -")
             console.log(_balance)
 
-
-
-
             const account_info = {
                 chain_id: _chain_id.toString(),
                 balance: _balance && _balance.amount ? _balance.amount : null,
