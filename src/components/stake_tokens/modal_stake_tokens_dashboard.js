@@ -6,12 +6,10 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import { styled } from '@mui/material/styles';
-import { orange } from '@mui/material/colors';
-import { grey } from '@mui/material/colors';
 import { Staked_validators } from './test_validators_data';
 import { Signed_CosmWasm_Client } from '../../core/signed_cosmwasm_client'
 import { ConstantineInfo } from '../../chain.info.constantine';
+import { ColorButton, GreyButton } from "./buttons_set"
 
 
 
@@ -53,26 +51,12 @@ export const Stake_Tokens_Modal_Dashboard = (props) => {
         }
     }
 
-    console.log("--- Delegating DATA, name", validator_name_input_value, "amount", delegated_amount_input_value)
+    const close_modal = async()=>{
 
-
-    const ColorButton = styled(Button)(({ theme }) => ({
-        color: theme.palette.getContrastText(orange[500]),
-        borderRadius: "15px",
-        backgroundColor: orange[500],
-        '&:hover': {
-          backgroundColor: orange[700],
-        },
-    }));
-
-    const GrayButton = styled(Button)(({ theme }) => ({
-        color: theme.palette.getContrastText(grey[900]),
-        borderRadius: "15px",
-        backgroundColor: grey[300],
-        '&:hover': {
-          backgroundColor: grey[400],
-        },
-    }));
+        setValidatorInputValue("")
+        setTokensInputValue(0)
+        handleClose()
+    }
 
     const delegate_button = (
 
@@ -113,7 +97,7 @@ export const Stake_Tokens_Modal_Dashboard = (props) => {
 
             </ColorButton>
         :
-            <GrayButton 
+            <GreyButton 
                 variant="contained" 
                 onClick={delegate_tokens}                    
                 style={{maxWidth: '170px', maxHeight: '130px', minWidth: '90px', minHeight: '50px'}}
@@ -122,7 +106,7 @@ export const Stake_Tokens_Modal_Dashboard = (props) => {
                     Stake
                 </Typography>
 
-            </GrayButton>
+            </GreyButton>
     )
 
 
@@ -131,7 +115,7 @@ export const Stake_Tokens_Modal_Dashboard = (props) => {
             {stake_button}
             <Modal
                 open={open}
-                onClose={handleClose}
+                onClose={close_modal}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >

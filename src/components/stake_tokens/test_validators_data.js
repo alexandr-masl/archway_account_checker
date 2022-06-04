@@ -260,7 +260,8 @@ export const Staked_validators = [
         operator_address: "archwayvaloper1t3zrk2vva33ajcut0rvjrtxchlynx7j5mmgj8m",
         // status: BOND_STATUS_BONDED,
         tokens: "100000000000032263",
-        unbonding_time: "1970-01-01T00:00:00Z"
+        unbonding_time: "1970-01-01T00:00:00Z",
+        staked_amount: "145"
     },
     {   
         label: "archway-2",
@@ -278,7 +279,8 @@ export const Staked_validators = [
         operator_address: "archwayvaloper1t3zrk2vva33ajcut0rvjrtxchlynx7j5mmgj8m",
         // status: BOND_STATUS_BONDED,
         tokens: "100000000000032263",
-        unbonding_time: "1970-01-01T00:00:00Z"
+        unbonding_time: "1970-01-01T00:00:00Z",
+        staked_amount: "455"
     },
     {   
         label: "archway-3",
@@ -296,7 +298,8 @@ export const Staked_validators = [
         operator_address: "archwayvaloper1t3zrk2vva33ajcut0rvjrtxchlynx7j5mmgj8m",
         // status: BOND_STATUS_BONDED,
         tokens: "100000000000032263",
-        unbonding_time: "1970-01-01T00:00:00Z"
+        unbonding_time: "1970-01-01T00:00:00Z",
+        staked_amount: "125"
     },
     {   
         label: "archway-4",
@@ -314,6 +317,7 @@ export const Staked_validators = [
         operator_address: "archwayvaloper1t3zrk2vva33ajcut0rvjrtxchlynx7j5mmgj8m",
         // status: BOND_STATUS_BONDED,
         tokens: "100000000000032263",
-        unbonding_time: "1970-01-01T00:00:00Z"
+        unbonding_time: "1970-01-01T00:00:00Z",
+        staked_amount: "8735"
     }
 ]
