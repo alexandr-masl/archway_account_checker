@@ -17,6 +17,8 @@ import { CosmWasm_Client } from '../../core/cosmwasm_client';
 import Cookies from 'js-cookie'
 
 import { Stake_Tokens_Modal_Dashboard } from "./modal_stake_tokens_dashboard"
+import { Revoke_Tokens_Modal_Dashboard } from "./modal_undelegate_tokens_dashboard"
+
 
 const Tokens_Item = styled(Paper)(({ theme }) => ({
 
@@ -162,7 +164,7 @@ export default class DashBoard extends Component {
                                                             <Grid item xs={3}>
                                                                 {/* <Button_Item> */}
 
-                                                                    <Stake_Tokens_Modal_Dashboard />
+                                                                    <Stake_Tokens_Modal_Dashboard data={this.state.balance}/>
 
                                                                 {/* </Button_Item> */}
                                                             </Grid>
@@ -197,7 +199,7 @@ export default class DashBoard extends Component {
                                                             <Grid item xs={3}>
                                                                 {/* <Button_Item> */}
 
-                                                                    <Stake_Tokens_Modal_Dashboard />
+                                                                    <Revoke_Tokens_Modal_Dashboard data={this.state.staked_tokens}/>
 
                                                                 {/* </Button_Item> */}
                                                             </Grid>

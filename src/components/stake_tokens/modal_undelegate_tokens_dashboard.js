@@ -28,40 +28,28 @@ const style = {
   p: 4,
 };
 
-export const Stake_Tokens_Modal_Dashboard = (props) => {
+export const Revoke_Tokens_Modal_Dashboard = (props) => {
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const [validator_name_input_value, setValidatorInputValue] = React.useState('');
-    const [delegated_amount_input_value, setTokensInputValue] = React.useState(0);
+    const [undelegated_amount_input_value, setTokensInputValue] = React.useState(0);
 
-    const delegate_tokens = async() => {
+    const undelegate_tokens = async() => {
 
-        console.log("---> delegate_tokens, DATA")
-        
-        if (props.data){   
-
+        if (props.data)
             handleOpen()
-
-            let offlineSigner = await window.getOfflineSigner(ConstantineInfo.chainId)
-
-            const sent_tokens = await new Signed_CosmWasm_Client().send_tokens("archway1ms4pgv3umf52rjy6zu5rqgyfsaemr6e9yg5y4w", "archwayvaloper1t3zrk2vva33ajcut0rvjrtxchlynx7j5mmgj8m", 123, offlineSigner)
-
-            console.log("======= SENT TOKENS ================")
-            console.log(sent_tokens)
-        }
     }
 
-    console.log("--- Delegating DATA, name", validator_name_input_value, "amount", delegated_amount_input_value)
-
+    console.log("--- Revoke_Tokens_Modal_Dashboard DATA", props.data)
 
     const ColorButton = styled(Button)(({ theme }) => ({
-        color: theme.palette.getContrastText(orange[500]),
+        color: theme.palette.getContrastText(orange[100]),
         borderRadius: "15px",
-        backgroundColor: orange[500],
+        backgroundColor: orange[100],
         '&:hover': {
-          backgroundColor: orange[700],
+          backgroundColor: orange[500],
         },
     }));
 
@@ -74,52 +62,54 @@ export const Stake_Tokens_Modal_Dashboard = (props) => {
         },
     }));
 
-    const delegate_button = (
+    const undelegate_button = (
 
-        (validator_name_input_value.length && delegated_amount_input_value) ?
-           ( <div>
-                <ColorButton 
-                    variant="contained" 
-                    style={{maxWidth: '170px', maxHeight: '130px', minWidth: '160px', minHeight: '45px'}}
-                    onClick={(data) => delegate_tokens(data)}
-                >
-                    Stake
+        (validator_name_input_value.length && undelegated_amount_input_value) ?
+           ( 
+               <div>
+                    <ColorButton 
+                        variant="contained" 
+                        style={{maxWidth: '170px', maxHeight: '130px', minWidth: '160px', minHeight: '45px'}}
+                        onClick={(data) => undelegate_tokens(data)}
+                    >
+                        Revoke
 
-                </ColorButton>
-            </div>)
+                    </ColorButton>
+                </div>
+            )
         :
             (<div>
                 <Button 
                     variant="outlined" 
                     style={{maxWidth: '170px', maxHeight: '130px', minWidth: '160px', minHeight: '45px'}} disabled>
 
-                        Stake
+                        Revoke
                 </Button>
             </div>)
     )
 
-    const stake_button = (
+    const revoke_button = (
 
         (props.data) ?
 
             <ColorButton 
                 variant="contained" 
-                onClick={delegate_tokens}                    
+                onClick={undelegate_tokens}                    
                 style={{maxWidth: '170px', maxHeight: '130px', minWidth: '90px', minHeight: '50px'}}
             >
                 <Typography variant="h4" component="div" color="#f5f5f5">
-                    Stake
+                    Revoke
                 </Typography>
 
             </ColorButton>
         :
             <GrayButton 
                 variant="contained" 
-                onClick={delegate_tokens}                    
+                onClick={undelegate_tokens}                    
                 style={{maxWidth: '170px', maxHeight: '130px', minWidth: '90px', minHeight: '50px'}}
             >
                 <Typography variant="h4" component="div" color="#f5f5f5">
-                    Stake
+                    Revoke
                 </Typography>
 
             </GrayButton>
@@ -128,7 +118,7 @@ export const Stake_Tokens_Modal_Dashboard = (props) => {
 
     return (
         <div>
-            {stake_button}
+            {revoke_button}
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -159,7 +149,7 @@ export const Stake_Tokens_Modal_Dashboard = (props) => {
                             />
                         </Grid>
                         <Grid item xs={6}>
-                            {delegate_button}
+                            {undelegate_button}
                         </Grid>
                     </Grid>
                 </Box>

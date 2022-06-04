@@ -19,6 +19,8 @@ export const Navigation = () => {
         setConnection(false)
 
         console.log("---- Connection", is_connected)
+
+        window.location.reload(false);
     }
 
     const connectWallet = async () => {
@@ -51,6 +53,8 @@ export const Navigation = () => {
                 Cookies.set("userAddress", userAddress)
 
                 console.log("---- connectWallet---- Connection", is_connected)
+
+                window.location.reload(false);
   
               } else {
                 console.warn('Error access experimental features, please update Keplr');
