@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import { Staked_validators } from './test_validators_data';
+import { All_validators } from './test_validators_data';
 import { Signed_CosmWasm_Client } from '../../core/signed_cosmwasm_client'
 import { ConstantineInfo } from '../../chain.info.constantine';
 import { ColorButton, GreyButton } from "./buttons_set"
@@ -75,7 +75,7 @@ export const Stake_Tokens_Modal_Dashboard = (props) => {
             (<div>
                 <Button 
                     variant="outlined" 
-                    style={{maxWidth: '170px', maxHeight: '130px', minWidth: '160px', minHeight: '45px'}} disabled>
+                    style={{maxWidth: '170px', maxHeight: '130px', minWidth: '160px', minHeight: '45px', borderRadius: "15px"}} disabled>
 
                         Stake
                 </Button>
@@ -125,7 +125,7 @@ export const Stake_Tokens_Modal_Dashboard = (props) => {
                             <Autocomplete
                                 disablePortal
                                 id="combo-box-demo"
-                                options={Staked_validators}
+                                options={All_validators}
                                 sx={{ width: 300 }}
                                 onChange={(event, newInputValue) => {
                                     setValidatorInputValue((newInputValue ? newInputValue.label : ""));

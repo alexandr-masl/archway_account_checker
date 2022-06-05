@@ -92,20 +92,11 @@ export default class DashBoard extends Component {
         if (cookies_user_adress){
 
             const account_info = await new CosmWasm_Client().get_account_info(cookies_user_adress)
-            
-            console.log("---------> ACCOUNT INFO ")
-            console.log(account_info)
 
             this.setState({balance: account_info.balance})
 
             const staked_tokens_numbers = Staked_validators.map(validator=> {return Number(validator.staked_amount)})
-
-            const all_staked_tokens = staked_tokens_numbers.reduce((validator_1,validator_2 ) => {
-
-                console.log("reduce 1arg", validator_1, "second", validator_2)
-
-                return validator_1 + validator_2
-            });
+            const all_staked_tokens = staked_tokens_numbers.reduce((validator_1,validator_2 ) => {return validator_1 + validator_2});
 
             this.setState({staked_tokens: all_staked_tokens})
         }

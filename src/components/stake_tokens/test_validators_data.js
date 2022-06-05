@@ -3,6 +3,7 @@
 export const All_validators = [   
 
     {   
+    label: "archway",
     max_change_rate: "0.010000000000000000",
     max_rate: "0.200000000000000000",
     rate: "0.100000000000000000",
@@ -20,6 +21,7 @@ export const All_validators = [
     unbonding_time: "1970-01-01T00:00:00Z"
     },
     {   
+        label: "archway-1",
         max_change_rate: "0.010000000000000000",
         max_rate: "0.200000000000000000",
         rate: "0.100000000000000000",
@@ -36,7 +38,8 @@ export const All_validators = [
         tokens: "100000000000032263",
         unbonding_time: "1970-01-01T00:00:00Z"
     },
-    {   
+    {           
+        label: "archway-2",
         max_change_rate: "0.010000000000000000",
         max_rate: "0.200000000000000000",
         rate: "0.100000000000000000",
@@ -54,6 +57,7 @@ export const All_validators = [
         unbonding_time: "1970-01-01T00:00:00Z"
     },
     {   
+        label: "archway-3",
         max_change_rate: "0.010000000000000000",
         max_rate: "0.200000000000000000",
         rate: "0.100000000000000000",
@@ -71,6 +75,7 @@ export const All_validators = [
         unbonding_time: "1970-01-01T00:00:00Z"
     },
     {   
+        label: "archway-4",
         max_change_rate: "0.010000000000000000",
         max_rate: "0.200000000000000000",
         rate: "0.100000000000000000",
@@ -88,6 +93,7 @@ export const All_validators = [
         unbonding_time: "1970-01-01T00:00:00Z"
     },
     {   
+        label: "archway-5",
         max_change_rate: "0.010000000000000000",
         max_rate: "0.200000000000000000",
         rate: "0.100000000000000000",
@@ -105,6 +111,7 @@ export const All_validators = [
         unbonding_time: "1970-01-01T00:00:00Z"
     },
     {   
+        label: "archway-6",
         max_change_rate: "0.010000000000000000",
         max_rate: "0.200000000000000000",
         rate: "0.100000000000000000",
@@ -122,6 +129,7 @@ export const All_validators = [
         unbonding_time: "1970-01-01T00:00:00Z"
     },
     {   
+        label: "archway-7",
         max_change_rate: "0.010000000000000000",
         max_rate: "0.200000000000000000",
         rate: "0.100000000000000000",
@@ -139,6 +147,7 @@ export const All_validators = [
         unbonding_time: "1970-01-01T00:00:00Z"
     },
     {   
+        label: "archway-8",
         max_change_rate: "0.010000000000000000",
         max_rate: "0.200000000000000000",
         rate: "0.100000000000000000",
@@ -156,6 +165,7 @@ export const All_validators = [
         unbonding_time: "1970-01-01T00:00:00Z"
     },
     {   
+        label: "archway-9",
         max_change_rate: "0.010000000000000000",
         max_rate: "0.200000000000000000",
         rate: "0.100000000000000000",
@@ -173,6 +183,7 @@ export const All_validators = [
         unbonding_time: "1970-01-01T00:00:00Z"
     },
     {   
+        label: "archway-10",
         max_change_rate: "0.010000000000000000",
         max_rate: "0.200000000000000000",
         rate: "0.100000000000000000",
@@ -190,6 +201,7 @@ export const All_validators = [
         unbonding_time: "1970-01-01T00:00:00Z"
     },
     {   
+        label: "archway-11",
         max_change_rate: "0.010000000000000000",
         max_rate: "0.200000000000000000",
         rate: "0.100000000000000000",
@@ -207,6 +219,7 @@ export const All_validators = [
         unbonding_time: "1970-01-01T00:00:00Z"
     },
     {   
+        label: "archway-12",
         max_change_rate: "0.010000000000000000",
         max_rate: "0.200000000000000000",
         rate: "0.100000000000000000",
@@ -224,6 +237,7 @@ export const All_validators = [
         unbonding_time: "1970-01-01T00:00:00Z"
     },
     {   
+        label: "archway-13",
         max_change_rate: "0.010000000000000000",
         max_rate: "0.200000000000000000",
         rate: "0.100000000000000000",

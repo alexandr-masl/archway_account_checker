@@ -17,9 +17,6 @@ export class CosmWasm_Client {
             const _chain_id = await cosm_wasm_client.getChainId()
             const _account = await cosm_wasm_client.getAccount(account_adress)
 
-            console.log("----- BALANCE -")
-            console.log(_balance)
-
             const account_info = {
                 chain_id: _chain_id.toString(),
                 balance: _balance && _balance.amount ? _balance.amount : null,

@@ -58,7 +58,7 @@ export const Claim_Tokens_Modal = (props) => {
         :
             <Button 
                 variant="outlined" 
-                style={{maxWidth: '170px', maxHeight: '130px', minWidth: '160px', minHeight: '45px'}} disabled
+                style={{maxWidth: '170px', maxHeight: '130px', minWidth: '160px', minHeight: '45px', borderRadius: "15px"}} disabled
             >
 
                 Claim

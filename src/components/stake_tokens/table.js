@@ -20,18 +20,7 @@ import Switch from '@mui/material/Switch';
 import SendIcon from '@mui/icons-material/Send';
 import { visuallyHidden } from '@mui/utils';
 import { All_validators } from './test_validators_data';
-import { orange } from '@mui/material/colors';
-import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-
-const ColorButton = styled(Button)(({ theme }) => ({
-  color: theme.palette.getContrastText(orange[500]),
-  borderRadius: "15px",
-  backgroundColor: orange[500],
-  '&:hover': {
-    backgroundColor: orange[700],
-  },
-}));
+import { Stake_Tokens_Modal_Table } from "./modal_stake_tokens_table"
 
 
 function create_validator(name, voting_power, commission, tokens_staked, stake) {
@@ -40,7 +29,6 @@ function create_validator(name, voting_power, commission, tokens_staked, stake) 
     name,
     voting_power,
     commission,
-    tokens_staked,
     stake,
   };
 }
@@ -98,12 +86,6 @@ const headCells = [
     label: 'Commission',
   },
   {
-    id: 'tokens_staked',
-    numeric: true,
-    disablePadding: false,
-    label: 'Tokens Staked',
-  },
-  {
     id: 'stake',
     numeric: true,
     disablePadding: false,
@@ -122,17 +104,6 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        {/* <TableCell padding="checkbox">
-          <Checkbox
-            color="primary"
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{
-              'aria-label': 'select all desserts',
-            }}
-          />
-        </TableCell> */}
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
@@ -176,10 +147,10 @@ EnhancedTableHead.propTypes = {
 const EnhancedTableToolbar = (props) => {
   const { numSelected } = props;
 
-  const handleToolbarSend = (event) => {
+  const handleToolbarStake = (event) => {
 
 
-    console.log("====> Toolbar SEND ", event)
+    console.log("====> Table STAKE ", event)
   };
 
   return (
@@ -216,7 +187,7 @@ const EnhancedTableToolbar = (props) => {
 
       {numSelected > 0 ? (
         <Tooltip title="Send">
-          <IconButton onClick={(event) => handleToolbarSend(event)}>
+          <IconButton onClick={(event) => handleToolbarStake(event)}>
             <SendIcon />
           </IconButton>
         </Tooltip>
@@ -235,7 +206,7 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export function Validators_Table() {
+export function Validators_Table(props) {
 
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('voting_power');
@@ -249,15 +220,6 @@ export function Validators_Table() {
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
-
-  // const handleSelectAllClick = (event) => {
-  //   if (event.target.checked) {
-  //     const newSelecteds = validators_data.map((n) => n.name);
-  //     setSelected(newSelecteds);
-  //     return;
-  //   }
-  //   setSelected([]);
-  // };
 
   const handleClick = (event, name) => {
 
@@ -288,10 +250,12 @@ export function Validators_Table() {
     setSelected(newSelected);
   };
 
-  const handleSend = (event, row_data) => {
+  const handleStake = (event, row_data) => {
 
-    console.log("===> Handle SEND")
+    console.log("===> Handle STAKE")
     console.log(row_data)
+
+
   };
 
   const handleChangePage = (event, newPage) => {
@@ -312,6 +276,34 @@ export function Validators_Table() {
   // Avoid a layout jump when reaching the last page with empty validators_data.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - validators_data.length) : 0;
+
+
+    // const _button = (
+
+    //   (props.data) ?
+
+    //       <ColorButton 
+    //           variant="contained" 
+    //           onClick={handleStake}                    
+    //           style={{maxWidth: '170px', maxHeight: '130px', minWidth: '90px', minHeight: '50px'}}
+    //       >
+    //           <Typography variant="h4" component="div" color="#f5f5f5">
+    //               Stake
+    //           </Typography>
+
+    //       </ColorButton>
+    //   :
+    //       <GreyButton 
+    //           variant="contained" 
+    //           onClick={handleStake}                    
+    //           style={{maxWidth: '170px', maxHeight: '130px', minWidth: '90px', minHeight: '50px'}}
+    //       >
+    //           <Typography variant="h4" component="div" color="#f5f5f5">
+    //               Stake
+    //           </Typography>
+
+    //       </GreyButton>
+  // )
 
   return (
 
@@ -384,22 +376,8 @@ export function Validators_Table() {
                                 {row.commission}
                               </Typography>
                             </TableCell>
-                            <TableCell align="right">
-                              <Typography variant="h6" component="h6">
-                                {row.tokens_staked}
-                              </Typography>
-                            </TableCell>
                             <TableCell align="right"> 
-                              <ColorButton 
-                                    variant="contained" 
-                                    // onClick={handleOpen}                    
-                                    style={{maxWidth: '170px', maxHeight: '130px', minWidth: '70px', minHeight: '35px'}}
-                                >
-                                    <Typography variant="h5" component="div" color="#f5f5f5">
-                                        Stake
-                                    </Typography>
-
-                                </ColorButton>
+                              <Stake_Tokens_Modal_Table data={props.data} />
                             </TableCell>
                           </TableRow>
                         );
