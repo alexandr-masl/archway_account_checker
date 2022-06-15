@@ -35,19 +35,17 @@ export const Stake_Tokens_Modal_Dashboard = (props) => {
     const [delegated_amount_input_value, setTokensInputValue] = React.useState(0);
 
     const delegate_tokens = async() => {
-
-        console.log("---> delegate_tokens, DATA")
         
         if (props.data){   
 
             handleOpen()
 
-            let offlineSigner = await window.getOfflineSigner(ConstantineInfo.chainId)
+            // let offlineSigner = await window.getOfflineSigner(ConstantineInfo.chainId)
 
-            const sent_tokens = await new Signed_CosmWasm_Client().send_tokens("archway1ms4pgv3umf52rjy6zu5rqgyfsaemr6e9yg5y4w", "archwayvaloper1t3zrk2vva33ajcut0rvjrtxchlynx7j5mmgj8m", 123, offlineSigner)
+            // const sent_tokens = await new Signed_CosmWasm_Client().send_tokens("archway1ms4pgv3umf52rjy6zu5rqgyfsaemr6e9yg5y4w", "archwayvaloper1t3zrk2vva33ajcut0rvjrtxchlynx7j5mmgj8m", 123, offlineSigner)
 
-            console.log("======= SENT TOKENS ================")
-            console.log(sent_tokens)
+            // console.log("======= SENT TOKENS ================")
+            // console.log(sent_tokens)
         }
     }
 

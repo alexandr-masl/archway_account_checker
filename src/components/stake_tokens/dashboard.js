@@ -217,7 +217,7 @@ export default class DashBoard extends Component {
                                         Stake-Dashboard
                                     </Typography>
                                     <Typography variant="h3" color="text.secondary" component="div">
-                                        Stake your tokens and withdraw rewards
+                                        Stake your tokens and withdraw the rewards here
                                     </Typography>
                             </CardContent>
                         </Grid>
